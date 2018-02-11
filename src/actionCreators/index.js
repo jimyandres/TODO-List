@@ -24,8 +24,17 @@ const checkAll = (completedAll) => {
   };
 };
 
+// return an object to dispatch the action type "DEL_TODO"
+const deleteTodo = (id) => {
+  return {
+    type: 'DEL_TODO',
+    id: id
+  };
+};
+
 export {
   addTodo,
   checkTodo,
+  deleteTodo,
   checkAll
 };

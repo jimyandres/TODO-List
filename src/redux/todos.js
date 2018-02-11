@@ -55,11 +55,12 @@ const todos = (state = [], action) => {
       var nextState = state.map(task => todo(task, action));
       return logState(nextState,action.type);
     case "DEL_TODO":
-      const indexOfDelete = state.findIndex(i => (i.id === state.id));
-      return [
+      const indexOfDelete = state.findIndex(i => (i.id === action.id));
+      var nextState = [
         ...state.slice(0, indexOfDelete),
         ...state.slice(indexOfDelete+1)
       ];
+      return logState(nextState,action.type);
     default:
       return state;
   }
