@@ -50,7 +50,8 @@ const todos = (state = [], action) => {
       var nextState = state.map(task => todo(task, action));
       return logState(nextState,action.type);
     case "EDIT_TODO":
-      return state.map(task => todo(task, action));
+      var nextState = state.map(task => todo(task, action));
+      return logState(nextState,action.type);
     case "CHECK_ALL":
       var nextState = state.map(task => todo(task, action));
       return logState(nextState,action.type);

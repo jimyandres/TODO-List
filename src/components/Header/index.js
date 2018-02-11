@@ -25,10 +25,10 @@ class Header extends Component {
     const { children } = this.props;
 
     return (
-      <di>
+      <div>
         <input type="checkbox" onClick={() => this.onClickCheckAll()} /> Check ALl
         {children}
-      </di>
+      </div>
     );
   };
 }

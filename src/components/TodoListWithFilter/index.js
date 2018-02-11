@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { checkTodo, deleteTodo } from '../../actionCreators';
+import { checkTodo, deleteTodo, editTodo } from '../../actionCreators';
 
 const Todo = (props) => {
-  const {key, onClick, text, checked, children, onMouseOver, onMouseOut} = props;
+  const { onClick, checked, children} = props;
+
+  var divstyle = {
+    display:'flex',
+    justifyContent: 'center'
+  };
 
   return (
-    <div key={key} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+    <div style={divstyle}>
       <input
         type="checkbox"
         onClick={onClick}
         checked={checked}
       />
-      {text}
-      {'  '}{children}
+      {children}
     </div>
   );
 };
@@ -23,11 +27,24 @@ class TodoWithDelete extends Component {
     super(props);
 
     this.state = {
-      hoverDelete: false
+      hoverDelete: false,
+      editing: false,
+      newText: ''
     };
 
     this.onMouseOver = this.onMouseOver.bind(this);
     this.onMouseOut = this.onMouseOut.bind(this);
+    this.onDoubleClick = this.onDoubleClick.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+  }
+
+  componentDidMount() {
+    const {text} = this.props;
+    this.setState({newText: text});
+  }
+
+  handleInput(newText) {
+    this.setState({newText: newText});
   }
 
   onMouseOver() {
@@ -38,23 +55,55 @@ class TodoWithDelete extends Component {
     this.setState({hoverDelete: false});
   }
 
-  render () {
-    const {onTodoDelete, ...rest} = this.props;
-    const {hoverDelete} = this.state;
+  onDoubleClick() {
+    this.setState({editing: true})
+  }
 
-    return (hoverDelete
-      ? <Todo
-          onMouseOver={() => this.onMouseOver()}
-          onMouseOut={() => this.onMouseOut()}
-          {...rest}
-        >
-          <span onClick={() => onTodoDelete(rest.id)}>X</span>
+  handleKeyPress(key) {
+    if (key === 'Enter') {
+      this.props.onTodoEdit(this.props.id, this.state.newText);
+      this.setState({editing: false});
+    }
+  }
+
+  render () {
+    const {onTodoDelete, id, ...rest} = this.props;
+    const {hoverDelete, editing, newText} = this.state;
+    return (
+
+      editing
+      ? <Todo {...rest}>
+          <div key={id}>
+            <input
+              type="text"
+              value={newText}
+              onChange={(e) => this.handleInput(e.target.value)}
+              onKeyPress={(e) => this.handleKeyPress(e.key)}
+            />
+          </div>
       </Todo>
-      : <Todo
-          onMouseOver={() => this.onMouseOver()}
-          onMouseOut={() => this.onMouseOut()}
-          {...rest}
-        />
+      : hoverDelete
+        ? <Todo {...rest}>
+            <div
+              key={id}
+              onMouseOver={() => this.onMouseOver()}
+              onMouseOut={() => this.onMouseOut()}
+              onDoubleClick={() => this.onDoubleClick()}
+            >
+              {newText}
+            </div>
+            <i onClick={() => onTodoDelete(id)}>X</i>
+        </Todo>
+        : <Todo {...rest}>
+            <div
+              key={id}
+              onMouseOver={() => this.onMouseOver()}
+              onMouseOut={() => this.onMouseOut()}
+              onDoubleClick={() => this.onDoubleClick()}
+            >
+              {newText}
+            </div>
+        </Todo>
     );
   }
 }
@@ -90,8 +139,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(checkTodo(id));
     },
     onTodoDelete: (id) => {
-      console.log(id);
       dispatch(deleteTodo(id));
+    },
+    onTodoEdit: (id, text) => {
+      dispatch(editTodo(id, text));
     }
   };
 };

@@ -16,11 +16,12 @@ const checkTodo = (id) => {
   };
 };
 
-// return an object to dispatch the action type "CHECK_ALL"
-const checkAll = (completedAll) => {
+// return an object to dispatch the action type "EDIT_TODO"
+const editTodo = (id, text) => {
   return {
-    type: 'CHECK_ALL',
-    completedAll: completedAll
+    type: 'EDIT_TODO',
+    id: id,
+    text: text
   };
 };
 
@@ -32,9 +33,18 @@ const deleteTodo = (id) => {
   };
 };
 
+// return an object to dispatch the action type "CHECK_ALL"
+const checkAll = (completedAll) => {
+  return {
+    type: 'CHECK_ALL',
+    completedAll: completedAll
+  };
+};
+
 export {
   addTodo,
   checkTodo,
+  editTodo,
   deleteTodo,
   checkAll
 };
