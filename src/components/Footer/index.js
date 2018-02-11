@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import FilterTodos from '../FilterTodos';
 
 const mapStateToProps = (state) => {
   return {todos: state.todos,}
@@ -8,7 +9,10 @@ const mapStateToProps = (state) => {
 let Footer = ({todos}) => {
   return (
     <p>
-      {todos.filter(t => !t.completed).length} Items Left
+      {todos.filter(t => !t.completed).length} Items Left,
+      <FilterTodos visibility='SHOW_ALL' title='All' />,
+      <FilterTodos visibility='SHOW_COMPLETED' title='Completed' />,
+      <FilterTodos visibility='SHOW_PENDING' title='Pending' />.
     </p>
   );
 };

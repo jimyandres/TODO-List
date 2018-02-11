@@ -126,10 +126,26 @@ const TodoList = (props) => {
   );
 };
 
+const getVisibleTodos = (todos, visibility) => {
+  switch (visibility) {
+    case "SHOW_ALL":
+      return todos;
+    case "SHOW_COMPLETED":
+      return todos.filter(t => t.completed);
+    case "SHOW_PENDING":
+      return todos.filter(t => !t.completed);
+    default:
+      return todos;
+  }
+};
+
 
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos,
+    todos: getVisibleTodos(
+      state.todos,
+      state.visibilityFilter
+    )
   };
 };
 

@@ -41,10 +41,19 @@ const checkAll = (completedAll) => {
   };
 };
 
+// return an object to dispatch the action to set visibility
+const setVisibility = (filter) => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter: filter
+  };
+};
+
 export {
   addTodo,
   checkTodo,
   editTodo,
   deleteTodo,
-  checkAll
+  checkAll,
+  setVisibility
 };
