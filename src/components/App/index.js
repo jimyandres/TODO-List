@@ -5,6 +5,7 @@ import './index.css';
 import Header from '../Header';
 import CreateTodo from '../CreateTodo';
 import TodoListWithFilter from '../TodoListWithFilter';
+import Footer from '../Footer';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           <CreateTodo />
         </Header>
         <TodoListWithFilter />
+        <Footer />
 
       </div>
     );
