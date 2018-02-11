@@ -57,10 +57,7 @@ const todos = (state = [], action) => {
       return logState(nextState,action.type);
     case "DEL_TODO":
       const indexOfDelete = state.findIndex(i => (i.id === action.id));
-      var nextState = [
-        ...state.slice(0, indexOfDelete),
-        ...state.slice(indexOfDelete+1)
-      ];
+      var nextState = state.filter(i => i.id !== action.id);
       return logState(nextState,action.type);
     default:
       return state;
