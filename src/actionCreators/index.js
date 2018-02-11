@@ -8,6 +8,15 @@ const addTodo = (text) => {
   };
 };
 
+// return an object to dispatch the action type "CHECK_TODO"
+const checkTodo = (id) => {
+  return {
+    type: 'CHECK_TODO',
+    id: id
+  };
+}
+
 export {
-  addTodo
+  addTodo,
+  checkTodo
 };

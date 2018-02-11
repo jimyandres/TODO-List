@@ -32,15 +32,23 @@ const todo = (state, action) => {
   }
 }
 
+const logState = (nextState, action) => {
+  console.log("Action: "+action);
+  console.log(nextState);
+  return nextState;
+};
+
 const todos = (state = [], action) => {
   switch (action.type) {
     case "ADD_TODO":
-      return [
+      var nextState = [
         ...state,
         todo(undefined, action)
       ];
+      return logState(nextState,action.type);
     case "CHECK_TODO":
-      return state.map(task => todo(task, action));
+      var nextState = state.map(task => todo(task, action));
+      return logState(nextState,action.type);
     case "EDIT_TODO":
       return state.map(task => todo(task, action));
     case "CHECK_ALL":
