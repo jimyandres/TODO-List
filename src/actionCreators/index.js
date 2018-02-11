@@ -49,11 +49,19 @@ const setVisibility = (filter) => {
   };
 };
 
+// return an object to dispatch the action type "CLEAR_COMPLETED"
+const clearTodos = () => {
+  return {
+    type: 'CLEAR_COMPLETED'
+  };
+};
+
 export {
   addTodo,
   checkTodo,
   editTodo,
   deleteTodo,
   checkAll,
-  setVisibility
+  setVisibility,
+  clearTodos
 };

@@ -59,6 +59,9 @@ const todos = (state = [], action) => {
       const indexOfDelete = state.findIndex(i => (i.id === action.id));
       var nextState = state.filter(i => i.id !== action.id);
       return logState(nextState,action.type);
+    case "CLEAR_COMPLETED":
+      var nextState = state.filter(i => !i.completed);
+      return nextState;
     default:
       return state;
   }
