@@ -52,7 +52,8 @@ const todos = (state = [], action) => {
     case "EDIT_TODO":
       return state.map(task => todo(task, action));
     case "CHECK_ALL":
-      return state.map(task => todo(task, action));
+      var nextState = state.map(task => todo(task, action));
+      return logState(nextState,action.type);
     case "DEL_TODO":
       const indexOfDelete = state.findIndex(i => (i.id === state.id));
       return [

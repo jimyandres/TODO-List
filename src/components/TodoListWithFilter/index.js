@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 import { checkTodo } from '../../actionCreators';
 
 const Todo = (props) => {
-  const {key, onClick, text} = props;
+  const {key, onClick, text, checked} = props;
 
   return (
     <div key={key}>
-      <input type="checkbox" onClick={onClick} />
+      <input
+        type="checkbox"
+        onClick={onClick}
+        checked={checked}
+      />
       {text}
     </div>
   );
@@ -22,6 +26,7 @@ const TodoList = (props) => {
         <Todo
           key={todo.id}
           onClick={() => onTodoCheck(todo.id)}
+          checked={todo.completed}
           {...todo}
         />
       )}

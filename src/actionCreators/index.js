@@ -14,9 +14,18 @@ const checkTodo = (id) => {
     type: 'CHECK_TODO',
     id: id
   };
-}
+};
+
+// return an object to dispatch the action type "CHECK_ALL"
+const checkAll = (completedAll) => {
+  return {
+    type: 'CHECK_ALL',
+    completedAll: completedAll
+  };
+};
 
 export {
   addTodo,
-  checkTodo
+  checkTodo,
+  checkAll
 };

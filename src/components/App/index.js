@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../../logo.svg';
 import './index.css';
 
+import Header from '../Header';
 import CreateTodo from '../CreateTodo';
 import TodoListWithFilter from '../TodoListWithFilter';
 
@@ -10,7 +11,9 @@ class App extends Component {
     return (
       <div className="App">
 
-        <CreateTodo />
+        <Header>
+          <CreateTodo />
+        </Header>
         <TodoListWithFilter />
 
       </div>
