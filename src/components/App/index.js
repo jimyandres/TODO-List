@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
 import './index.css';
 
 import Header from '../Header';
@@ -11,13 +10,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className='AppTitle'>
+          <h1>TO DO</h1>
+        </div>
 
-        <Header>
-          <CreateTodo />
-        </Header>
-        <TodoListWithFilter />
+        <div>
+          <Header>
+            <CreateTodo />
+          </Header>
+          <TodoListWithFilter />
+        </div>
         <Footer />
-
       </div>
     );
   }
