@@ -7,15 +7,16 @@ let CreateTodo = ({dispatch}) => {
   let todoText;
 
   return (
-    <div>
-      <input ref={node => todoText = node} />
-      <button onClick={() => {
-        dispatch(addTodo(todoText.value));
-        todoText.value = '';
-      }}
-      >
-          add
-      </button>
+    <div className="divInput">
+      <input
+        className="input"
+        placeholder="Add a new task!"
+        ref={node => todoText = node} onKeyPress= {(e) => {
+        if (e.key === "Enter" && todoText.value !== '') {
+          dispatch(addTodo(todoText.value));
+          todoText.value = '';
+        }
+      }}/>
     </div>
   );
 };
