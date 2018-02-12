@@ -12,10 +12,11 @@ let CreateTodo = ({dispatch}) => {
         className="input"
         placeholder="Add a new task!"
         ref={node => todoText = node} onKeyPress= {(e) => {
-        if (e.key === "Enter" && todoText.value !== '') {
-          dispatch(addTodo(todoText.value));
-          todoText.value = '';
-        }
+          const text = todoText.value.trim();
+          if (e.key === "Enter" && text !== '') {
+            dispatch(addTodo(text));
+            todoText.value = '';
+          }
       }}/>
     </div>
   );

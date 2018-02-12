@@ -63,9 +63,10 @@ class Todo extends Component {
   }
 
   handleKeyPress(key) {
-    if (key === 'Enter' && this.state.newText !== '') {
-      this.props.onTodoEdit(this.props.id, this.state.newText);
-      this.setState({editing: false});
+    const text = this.state.newText.trim();
+    if (key === 'Enter' && text !== '') {
+      this.props.onTodoEdit(this.props.id, text);
+      this.setState({editing: false, newText:text});
     }
   }
 
