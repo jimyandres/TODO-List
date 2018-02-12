@@ -1,0 +1,21 @@
+#Filters {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+#CompletedTasks {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  font-size: 14px;
+  width: 150px;
+  margin: 0 0.5em;
+  border-radius: 2em;
+  padding: 0.4em 1em;
+  border: 1px solid;
+  letter-spacing: 0;
+  font-family: inherit;
+  color: #45767F;
+  border: #45767F 1px solid;
+}
