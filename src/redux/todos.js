@@ -32,6 +32,12 @@ const todo = (state, action) => {
   }
 }
 
+/*
+  Function to track the actions dispatched to the Redux tree state
+  Usit when need to debug or get track of the app actions.
+
+  It asks for the "nextState" gived by the reducer and "action" dispatched
+*/
 const logState = (nextState, action) => {
   console.log("Action: "+action);
   console.log(nextState);
@@ -41,27 +47,20 @@ const logState = (nextState, action) => {
 const todos = (state = [], action) => {
   switch (action.type) {
     case "ADD_TODO":
-      var nextState = [
+      return [
         ...state,
         todo(undefined, action)
       ];
-      return logState(nextState,action.type);
     case "CHECK_TODO":
-      var nextState = state.map(task => todo(task, action));
-      return logState(nextState,action.type);
+      return state.map(task => todo(task, action));
     case "EDIT_TODO":
-      var nextState = state.map(task => todo(task, action));
-      return logState(nextState,action.type);
+      return state.map(task => todo(task, action));
     case "CHECK_ALL":
-      var nextState = state.map(task => todo(task, action));
-      return logState(nextState,action.type);
+      return state.map(task => todo(task, action));
     case "DEL_TODO":
-      const indexOfDelete = state.findIndex(i => (i.id === action.id));
-      var nextState = state.filter(i => i.id !== action.id);
-      return logState(nextState,action.type);
+      return state.filter(i => i.id !== action.id);
     case "CLEAR_COMPLETED":
-      var nextState = state.filter(i => !i.completed);
-      return nextState;
+      return state.filter(i => !i.completed);
     default:
       return state;
   }
