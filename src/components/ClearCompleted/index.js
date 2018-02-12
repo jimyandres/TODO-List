@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { clearTodos } from '../../actionCreators';
+import './index.css';
 
 const mapStateToProps = (state) => {
   return {
@@ -16,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
 
 let ClearCompleted = ({todos, onClick}) => {
   return (
-    <a href="#" onClick={onClick}>Clear Completed ({todos.filter(i => i.completed).length})</a>
+    <button className="btn clearTodos" onClick={onClick}>Clear Completed ({todos.filter(i => i.completed).length})</button>
   );
 };
 ClearCompleted = connect(mapStateToProps, mapDispatchToProps)(ClearCompleted);
