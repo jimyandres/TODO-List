@@ -1,0 +1,26 @@
+.btn {
+  background: none;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  width: 200px;
+  font-size: 14px;
+  margin: 0 0.5em;
+  border-radius: 2em;
+  padding: 0.75em 1.5em;
+  cursor: pointer;
+  color: darken(#006B7F, 20%);
+  border: 1px solid;
+  letter-spacing: 1px;
+  font-family: inherit;
+  color: #006B7F;
+  border: #006B7F 1px solid;
+  transition: 250ms ease-out;
+}
+.btn:hover,
+.btn.active {
+  cursor: pointer;
+  color: #fff;
+  background: #006B7F;
+}

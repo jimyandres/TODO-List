@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setVisibility } from '../../actionCreators';
+import './index.css';
 
 const Filter = ({active, onClick, title}) => {
+  let btnStyle = "btn ";
   if (active) {
-    return <span>{title}</span>;
+    btnStyle += "active"
   }
   return (
-    <a href="#" onClick={onClick}>{title}</a>
+    <button className={btnStyle} onClick={onClick}>{title}</button>
   );
 };
 
