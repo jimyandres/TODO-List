@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { checkTodo, deleteTodo, editTodo } from '../../actionCreators';
 
-const Todo = (props) => {
+const TodoCheckbox = (props) => {
   const { onClick, checked, children} = props;
 
   var divstyle = {
@@ -22,7 +22,7 @@ const Todo = (props) => {
   );
 };
 
-class TodoWithDelete extends Component {
+class Todo extends Component {
   constructor(props) {
     super(props);
 
@@ -39,8 +39,7 @@ class TodoWithDelete extends Component {
   }
 
   componentDidMount() {
-    const {text} = this.props;
-    this.setState({newText: text});
+    this.setState({newText: this.props.text});
   }
 
   handleInput(newText) {
@@ -71,42 +70,79 @@ class TodoWithDelete extends Component {
     const {hoverDelete, editing, newText} = this.state;
     return (
 
-      editing
-      ? <Todo {...rest}>
-          <div key={id}>
-            <input
-              type="text"
-              value={newText}
-              onChange={(e) => this.handleInput(e.target.value)}
-              onKeyPress={(e) => this.handleKeyPress(e.key)}
-            />
-          </div>
-      </Todo>
-      : hoverDelete
-        ? <Todo {...rest}>
-            <div
-              key={id}
-              onMouseOver={() => this.onMouseOver()}
-              onMouseOut={() => this.onMouseOut()}
-              onDoubleClick={() => this.onDoubleClick()}
-            >
-              {newText}
-            </div>
-            <i onClick={() => onTodoDelete(id)}>X</i>
-        </Todo>
-        : <Todo {...rest}>
-            <div
-              key={id}
-              onMouseOver={() => this.onMouseOver()}
-              onMouseOut={() => this.onMouseOut()}
-              onDoubleClick={() => this.onDoubleClick()}
-            >
-              {newText}
-            </div>
-        </Todo>
+      <TodoWithInput
+        isEditing={editing}
+        value={newText}
+        text={newText}
+        onChange={(e) => this.handleInput(e.target.value)}
+        onKeyPress={(e) => this.handleKeyPress(e.key)}
+
+        hoverDelete={hoverDelete}
+        onMouseOver={() => this.onMouseOver()}
+        onMouseOut={() => this.onMouseOut()}
+        onDoubleClick={() => this.onDoubleClick()}
+        onTodoDelete={() => onTodoDelete(id)}
+        {...rest}
+      />
     );
   }
 }
+
+const TodoEdit = (props) => {
+  const { onChange, onKeyPress, value,...rest } = props;
+  return (
+    <TodoCheckbox {...rest} >
+      <input
+        type="text"
+        value={value}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+      />
+    </TodoCheckbox>
+  );
+};
+
+const TodoPlain = (props) => {
+  const { onMouseOver, onMouseOut, onDoubleClick, text } = props;
+  return (
+    <div
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
+      onDoubleClick={onDoubleClick}
+    >
+      {text}
+    </div>
+  );
+}
+
+const TodoDelete = (props) => {
+  const { onTodoDelete, ...rest } = props;
+  return (
+    <TodoCheckbox {...rest}>
+      <TodoPlain {...rest} />
+      <i onClick={onTodoDelete}> X </i>
+    </TodoCheckbox>
+  );
+};
+
+
+const withDelete = (Component) =>
+  ({hoverDelete, ...rest}) =>
+    hoverDelete
+    ? <TodoDelete {...rest} />
+    : <Component {...rest}>
+      <TodoPlain {...rest} />
+    </Component>
+
+const TodoWithDelete = withDelete(TodoCheckbox);
+
+const withInput = (Component) =>
+  ({isEditing, ...rest}) =>
+    isEditing
+    ? <TodoEdit {...rest} />
+    : <Component {...rest} />
+
+const TodoWithInput = withInput(TodoWithDelete);
 
 const TodoList = (props) => {
   const { todos, onTodoCheck, ...rest } = props;
@@ -114,7 +150,7 @@ const TodoList = (props) => {
   return (
     <ul>
       {todos.map(todo =>
-        <TodoWithDelete
+        <Todo
           key={todo.id}
           onClick={() => onTodoCheck(todo.id)}
           checked={todo.completed}
