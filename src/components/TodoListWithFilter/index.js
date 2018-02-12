@@ -11,7 +11,7 @@ const TodoCheckbox = (props) => {
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
       >
-      <div class="checkbox">
+      <div className="checkbox">
         <input
           type="checkbox"
           onClick={onClick}
@@ -19,7 +19,7 @@ const TodoCheckbox = (props) => {
           readOnly={true}
           id={id}
         />
-        <label for={id} className="checkboxLabel"></label>
+        <label htmlFor={id} className="checkboxLabel"></label>
       </div>
       {children}
     </div>

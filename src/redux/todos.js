@@ -38,11 +38,13 @@ const todo = (state, action) => {
 
   It asks for the "nextState" gived by the reducer and "action" dispatched
 */
+/*
 const logState = (nextState, action) => {
   console.log("Action: "+action);
   console.log(nextState);
   return nextState;
 };
+*/
 
 const todos = (state = [], action) => {
   switch (action.type) {
