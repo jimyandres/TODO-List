@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { checkTodo, deleteTodo, editTodo } from '../../actionCreators';
+import './index.css';
 
 const TodoCheckbox = (props) => {
-  const { onClick, checked, children} = props;
-
-  var divstyle = {
-    display:'flex',
-    justifyContent: 'center'
-  };
-
+  const { onMouseOver, onMouseOut, onClick, checked, id, children} = props;
   return (
-    <div style={divstyle}>
-      <input
-        type="checkbox"
-        onClick={onClick}
-        checked={checked}
-      />
+    <div
+      className="divTodo"
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
+      >
+      <div class="checkbox">
+        <input
+          type="checkbox"
+          onClick={onClick}
+          checked={checked}
+          readOnly={true}
+          id={id}
+        />
+        <label for={id} className="checkboxLabel"></label>
+      </div>
       {children}
     </div>
   );
@@ -59,7 +63,7 @@ class Todo extends Component {
   }
 
   handleKeyPress(key) {
-    if (key === 'Enter') {
+    if (key === 'Enter' && this.state.newText !== '') {
       this.props.onTodoEdit(this.props.id, this.state.newText);
       this.setState({editing: false});
     }
@@ -72,6 +76,7 @@ class Todo extends Component {
 
       <TodoWithInput
         isEditing={editing}
+        id={id}
         value={newText}
         text={newText}
         onChange={(e) => this.handleInput(e.target.value)}
@@ -93,6 +98,7 @@ const TodoEdit = (props) => {
   return (
     <TodoCheckbox {...rest} >
       <input
+        className="input"
         type="text"
         value={value}
         onChange={onChange}
@@ -103,11 +109,12 @@ const TodoEdit = (props) => {
 };
 
 const TodoPlain = (props) => {
-  const { onMouseOver, onMouseOut, onDoubleClick, text } = props;
+  const { onDoubleClick, text, checked } = props;
+  let todoStyle = "todoText ";
+  todoStyle += checked ? "checked" : "";
   return (
     <div
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
+      className={todoStyle}
       onDoubleClick={onDoubleClick}
     >
       {text}
@@ -120,11 +127,15 @@ const TodoDelete = (props) => {
   return (
     <TodoCheckbox {...rest}>
       <TodoPlain {...rest} />
-      <i onClick={onTodoDelete}> X </i>
+      <div />
+      <div className="outer" onClick={onTodoDelete}>
+        <div className="inner">
+          <label className="labelClose">Delete!</label>
+        </div>
+      </div>
     </TodoCheckbox>
   );
 };
-
 
 const withDelete = (Component) =>
   ({hoverDelete, ...rest}) =>
@@ -132,6 +143,7 @@ const withDelete = (Component) =>
     ? <TodoDelete {...rest} />
     : <Component {...rest}>
       <TodoPlain {...rest} />
+      <div />
     </Component>
 
 const TodoWithDelete = withDelete(TodoCheckbox);
