@@ -5,7 +5,7 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-
+import throttle from 'lodash/throttle';
 import todoApp from './redux';
 import { loadState, saveState } from './localStorage';
 
@@ -16,10 +16,10 @@ const store = createStore(
   persistedState
 );
 
-store.subscribe(() =>
+store.subscribe(throttle( () =>
   saveState({
     todos: store.getState().todos
-  })
+  }), 1000)
 );
 
 ReactDOM.render(
