@@ -13,17 +13,15 @@ const Filter = ({active, onClick, title}) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    active: ownProps.visibility === state.visibilityFilter,
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  active: ownProps.visibility === state.visibilityFilter,
+});
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    onClick: () => dispatch(setVisibility(ownProps.visibility))
-  };
-};
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onClick() {
+    dispatch(setVisibility(ownProps.visibility))
+  }
+});
 
 const FilterTodos = connect(mapStateToProps, mapDispatchToProps)(Filter);
 
