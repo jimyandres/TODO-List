@@ -1,10 +1,13 @@
+import { v4 } from 'uuid'; // generation of RFC4122 UUIDS. Version 4 (random)
+
 // Return an objet to dispatch the action type "ADD_TODO"
-let todoId = 0;
-const addTodo = (text) => ({
-  type: 'ADD_TODO',
-  id: todoId++,
-  text
-});
+const addTodo = (text) => {
+  return {
+    type: 'ADD_TODO',
+    id: v4(),
+    text
+  };
+};
 
 // return an object to dispatch the action type "CHECK_TODO"
 const checkTodo = (id) => ({

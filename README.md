@@ -1,5 +1,5 @@
 # TO-DO List
-A simple TO-DO list application using React.js + Redux.
+A simple TO-DO list application using React.js + Redux. You can find a live version, [here](http://TodoList.jimyandres.me)
 
 ## About the project
 
