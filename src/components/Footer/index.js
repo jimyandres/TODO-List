@@ -12,9 +12,9 @@ let Footer = ({todos}) => {
   return (
     <div id="Footer">
       <div id="Filters">
-        <FilterTodos visibility='SHOW_ALL' title='All' />
-        <FilterTodos visibility='SHOW_COMPLETED' title='Completed' />
-        <FilterTodos visibility='SHOW_PENDING' title='Pending' />
+        <FilterTodos visibility='all' title='All' />
+        <FilterTodos visibility='completed' title='Completed' />
+        <FilterTodos visibility='pending' title='Pending' />
       </div>
       <div id="CompletedTasks" className="left">
         {todos.filter(t => !t.completed).length} Items Left
