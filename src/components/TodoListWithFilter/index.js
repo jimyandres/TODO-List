@@ -177,11 +177,11 @@ const TodoList = (props) => {
 
 const getVisibleTodos = (todos, visibility) => {
   switch (visibility) {
-    case "SHOW_ALL":
+    case "all":
       return todos;
-    case "SHOW_COMPLETED":
+    case "completed":
       return todos.filter(t => t.completed);
-    case "SHOW_PENDING":
+    case "pending":
       return todos.filter(t => !t.completed);
     default:
       return todos;
@@ -189,11 +189,11 @@ const getVisibleTodos = (todos, visibility) => {
 };
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     todos: getVisibleTodos(
       state.todos,
-      state.visibilityFilter
+      ownProps.visibility
     )
   };
 };
