@@ -17,6 +17,7 @@
   color: #006B7F;
   border: #006B7F 1px solid;
   transition: 250ms ease-out;
+  text-decoration: none;
 }
 .btn:hover,
 .btn.active {
