@@ -1,19 +1,6 @@
 import { combineReducers } from 'redux';
 import todo from './todo';
-
-/*
-  Function to track the actions dispatched to the Redux tree state
-  Usit when need to debug or get track of the app actions.
-
-  It asks for the "nextState" gived by the reducer and "action" dispatched
-*/
-/*
-const logState = (nextState, action) => {
-  console.log("Action: "+action);
-  console.log(nextState);
-  return nextState;
-};
-*/
+import omit from 'lodash/omit';
 
 const byId = (state = {}, action) => {
   switch (action.type) {
@@ -25,15 +12,10 @@ const byId = (state = {}, action) => {
         ...state,
         [action.id]: todo(state[action.id], action)
       };
-      // return state.map(task => todo(task, action));
-    // case "EDIT_TODO":
-      // return state.map(task => todo(task, action));
-    // case "CHECK_ALL":
-      // return state.map(task => todo(task, action));
     case "DEL_TODO":
-      return state.filter(i => i.id !== action.id);
+      return omit(state,action.id);
     case "CLEAR_COMPLETED":
-      return state.filter(i => !i.completed);
+      return omit(state,action.Ids);
     default:
       return state;
   }
@@ -43,6 +25,10 @@ const allIds = (state = [], action) => {
   switch (action.type) {
     case "ADD_TODO":
       return [...state, action.id];
+    case "DEL_TODO":
+      return state.filter(key => key !== action.id);
+    case "CLEAR_COMPLETED":
+      return state.filter(key => key !== action.Ids.filter(key2 => key2 === key)[0]);
     default:
       return state;
   }

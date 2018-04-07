@@ -41,8 +41,9 @@ const setVisibility = (filter) => ({
 });
 
 // return an object to dispatch the action type "CLEAR_COMPLETED"
-const clearTodos = () => ({
-  type: 'CLEAR_COMPLETED'
+const clearTodos = (allIdsToDelete) => ({
+  type: 'CLEAR_COMPLETED',
+  Ids: allIdsToDelete
 });
 
 export {
