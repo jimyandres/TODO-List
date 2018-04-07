@@ -21,7 +21,7 @@ let ClearCompleted = ({todos, onClick}) => {
       className="btn clearTodos"
       onClick={() => onClick(todos.allIds.filter(key => todos.byId[key].completed))}
     >
-      Clear Completed ({todos.allIds.filter(key => todos.byId[key].completed).length})
+      Clear Completed ({todos.idsByVisibility.completed.length})
     </button>
   );
 };
