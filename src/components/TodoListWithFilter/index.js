@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { getVisibleTodos } from '../../redux';
 import { checkTodo, deleteTodo, editTodo } from '../../actionCreators';
+import { fetchTodos } from '../../api';
 import './index.css';
 
 const TodoCheckbox = (props) => {
@@ -177,36 +178,37 @@ const TodoList = (props) => {
   );
 };
 
+class TodoListWithFilter extends Component {
+  componentDidMount() {
+    fetchTodos(this.props.visibility).then(todos => console.log(this.props.visibility, todos));
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.visibility !== prevProps.visibility) {
+      fetchTodos(this.props.visibility).then(todos => console.log(this.props.visibility, todos));
+    }
+  }
+
+  render() {
+    return <TodoList {...this.props} />;
+  }
+}
+
 const mapStateToProps = (state, {match}) => {
+  const visibility = match.params.visibility || 'all';
   return {
-    todos: getVisibleTodos(
-      state,
-      match.params.visibility || 'all'
-    )
+    todos: getVisibleTodos(state,visibility),
+    visibility,
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onTodoCheck: (id) => {
-//       dispatch(checkTodo(id));
-//     },
-//     onTodoDelete: (id) => {
-//       dispatch(deleteTodo(id));
-//     },
-//     onTodoEdit: (id, text) => {
-//       dispatch(editTodo(id, text));
-//     }
-//   };
-// };
-
-const TodoListWithFilter = withRouter(connect(
+TodoListWithFilter = withRouter(connect(
   mapStateToProps,
   {
     onTodoCheck: checkTodo,
     onTodoDelete: deleteTodo,
     onTodoEdit: editTodo
   }
-)(TodoList));
+)(TodoListWithFilter));
 
 export default TodoListWithFilter;
