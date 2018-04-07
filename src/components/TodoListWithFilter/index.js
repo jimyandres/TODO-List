@@ -199,23 +199,27 @@ const mapStateToProps = (state, {match}) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onTodoCheck: (id) => {
-      dispatch(checkTodo(id));
-    },
-    onTodoDelete: (id) => {
-      dispatch(deleteTodo(id));
-    },
-    onTodoEdit: (id, text) => {
-      dispatch(editTodo(id, text));
-    }
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onTodoCheck: (id) => {
+//       dispatch(checkTodo(id));
+//     },
+//     onTodoDelete: (id) => {
+//       dispatch(deleteTodo(id));
+//     },
+//     onTodoEdit: (id, text) => {
+//       dispatch(editTodo(id, text));
+//     }
+//   };
+// };
 
 const TodoListWithFilter = withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps
+  {
+    onTodoCheck: checkTodo,
+    onTodoDelete: deleteTodo,
+    onTodoEdit: editTodo
+  }
 )(TodoList));
 
 export default TodoListWithFilter;
