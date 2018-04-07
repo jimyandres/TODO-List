@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { getVisibleTodos } from '../../redux';
-import { checkTodo, deleteTodo, editTodo } from '../../actionCreators';
+import * as actions from '../../actionCreators';
 import { fetchTodos } from '../../api';
 import './index.css';
 
@@ -180,13 +180,21 @@ const TodoList = (props) => {
 
 class TodoListWithFilter extends Component {
   componentDidMount() {
-    fetchTodos(this.props.visibility).then(todos => console.log(this.props.visibility, todos));
+    this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.visibility !== prevProps.visibility) {
-      fetchTodos(this.props.visibility).then(todos => console.log(this.props.visibility, todos));
+      this.fetchData();
     }
+  }
+
+  fetchData() {
+    const { visibility, receiveTodos } = this.props;
+    fetchTodos(visibility)
+      .then(todos =>
+        receiveTodos(todos)
+      );
   }
 
   render() {
@@ -205,9 +213,10 @@ const mapStateToProps = (state, {match}) => {
 TodoListWithFilter = withRouter(connect(
   mapStateToProps,
   {
-    onTodoCheck: checkTodo,
-    onTodoDelete: deleteTodo,
-    onTodoEdit: editTodo
+    onTodoCheck: actions.checkTodo,
+    onTodoDelete: actions.deleteTodo,
+    onTodoEdit: actions.editTodo,
+    receiveTodos: actions.receiveTodos
   }
 )(TodoListWithFilter));
 
