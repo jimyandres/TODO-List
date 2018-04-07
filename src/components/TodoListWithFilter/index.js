@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { getVisibleTodos } from '../../redux';
 import { checkTodo, deleteTodo, editTodo } from '../../actionCreators';
 import './index.css';
 
@@ -176,24 +177,10 @@ const TodoList = (props) => {
   );
 };
 
-const getVisibleTodos = (todos, visibility) => {
-  switch (visibility) {
-    case "all":
-      return todos;
-    case "completed":
-      return todos.filter(t => t.completed);
-    case "pending":
-      return todos.filter(t => !t.completed);
-    default:
-      return todos;
-  }
-};
-
-
 const mapStateToProps = (state, {match}) => {
   return {
     todos: getVisibleTodos(
-      state.todos,
+      state,
       match.params.visibility || 'all'
     )
   };

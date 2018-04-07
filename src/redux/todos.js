@@ -69,3 +69,16 @@ const todos = (state = [], action) => {
 }
 
 export default todos;
+
+export const getVisibleTodos = (state, visibility) => {
+  switch (visibility) {
+    case "all":
+      return state;
+    case "completed":
+      return state.filter(t => t.completed);
+    case "pending":
+      return state.filter(t => !t.completed);
+    default:
+      return state;
+  }
+};
