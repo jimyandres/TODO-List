@@ -17,7 +17,12 @@ const mapDispatchToProps = (dispatch) => {
 
 let ClearCompleted = ({todos, onClick}) => {
   return (
-    <button className="btn clearTodos" onClick={onClick}>Clear Completed ({todos.filter(i => i.completed).length})</button>
+    <button
+      className="btn clearTodos"
+      onClick={onClick}
+    >
+      Clear Completed ({todos.allIds.filter(key => todos.byId[key].completed).length})
+    </button>
   );
 };
 ClearCompleted = connect(mapStateToProps, mapDispatchToProps)(ClearCompleted);

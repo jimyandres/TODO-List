@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
 
 let CompletedTasks = ({todos}) =>
   <div id="CompletedTasks" className="left">
-    {todos.filter(t => !t.completed).length} Items Left
+    {todos.allIds.filter(key => !todos.byId[key].completed).length} Items Left
   </div>
 
 CompletedTasks = connect(mapStateToProps)(CompletedTasks);

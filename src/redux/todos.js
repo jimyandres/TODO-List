@@ -1,36 +1,5 @@
-const todo = (state, action) => {
-  switch (action.type) {
-    case "ADD_TODO":
-      return {
-        id: action.id,
-        text: action.text,
-        completed: false,
-      };
-    case "CHECK_TODO":
-      if (state.id !== action.id) {
-        return state;
-      }
-      return {
-        ...state,
-        completed: !state.completed
-      };
-    case "EDIT_TODO":
-      if (state.id !== action.id) {
-        return state;
-      }
-      return {
-        ...state,
-        text: action.text,
-      };
-    case "CHECK_ALL":
-      return {
-        ...state,
-        completed: action.completedAll
-      };
-    default:
-      return state;
-  }
-}
+import { combineReducers } from 'redux';
+import todo from './todo';
 
 /*
   Function to track the actions dispatched to the Redux tree state
@@ -46,19 +15,21 @@ const logState = (nextState, action) => {
 };
 */
 
-const todos = (state = [], action) => {
+const byId = (state = {}, action) => {
   switch (action.type) {
     case "ADD_TODO":
-      return [
-        ...state,
-        todo(undefined, action)
-      ];
     case "CHECK_TODO":
-      return state.map(task => todo(task, action));
     case "EDIT_TODO":
-      return state.map(task => todo(task, action));
     case "CHECK_ALL":
-      return state.map(task => todo(task, action));
+      return {
+        ...state,
+        [action.id]: todo(state[action.id], action)
+      };
+      // return state.map(task => todo(task, action));
+    // case "EDIT_TODO":
+      // return state.map(task => todo(task, action));
+    // case "CHECK_ALL":
+      // return state.map(task => todo(task, action));
     case "DEL_TODO":
       return state.filter(i => i.id !== action.id);
     case "CLEAR_COMPLETED":
@@ -68,17 +39,34 @@ const todos = (state = [], action) => {
   }
 }
 
-export default todos;
-
-export const getVisibleTodos = (state, visibility) => {
-  switch (visibility) {
-    case "all":
-      return state;
-    case "completed":
-      return state.filter(t => t.completed);
-    case "pending":
-      return state.filter(t => !t.completed);
+const allIds = (state = [], action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return [...state, action.id];
     default:
       return state;
+  }
+};
+
+const todos = combineReducers({
+  byId,
+  allIds
+});
+
+export default todos;
+
+const getAllTodos = (state) => state.allIds.map(id => state.byId[id]);
+
+export const getVisibleTodos = (state, visibility) => {
+  const allTodos = getAllTodos(state);
+  switch (visibility) {
+    case "all":
+      return allTodos;
+    case "completed":
+      return allTodos.filter(t => t.completed);
+    case "pending":
+      return allTodos.filter(t => !t.completed);
+    default:
+      return allTodos;
   }
 };
