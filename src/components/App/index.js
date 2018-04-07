@@ -6,7 +6,7 @@ import CreateTodo from '../CreateTodo';
 import TodoListWithFilter from '../TodoListWithFilter';
 import Footer from '../Footer';
 
-const App = ({match}) =>
+const App = () =>
   <div className="App">
     <div className='AppTitle'>
       <h1>TO DO</h1>
@@ -16,9 +16,7 @@ const App = ({match}) =>
       <Header>
         <CreateTodo />
       </Header>
-      <TodoListWithFilter
-        visibility={ match.params.visibility || 'all' }
-      />
+      <TodoListWithFilter />
     </div>
     <Footer />
   </div>

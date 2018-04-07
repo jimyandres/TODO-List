@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { checkTodo, deleteTodo, editTodo } from '../../actionCreators';
 import './index.css';
 
@@ -189,11 +190,11 @@ const getVisibleTodos = (todos, visibility) => {
 };
 
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, {match}) => {
   return {
     todos: getVisibleTodos(
       state.todos,
-      ownProps.visibility
+      match.params.visibility || 'all'
     )
   };
 };
@@ -212,9 +213,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const TodoListWithFilter = connect(
+const TodoListWithFilter = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList);
+)(TodoList));
 
 export default TodoListWithFilter;
