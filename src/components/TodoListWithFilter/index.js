@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { getVisibleTodos } from '../../redux';
 import * as actions from '../../actionCreators';
-import { fetchTodos } from '../../api';
 import './index.css';
 
 const TodoCheckbox = (props) => {
@@ -190,11 +189,8 @@ class TodoListWithFilter extends Component {
   }
 
   fetchData() {
-    const { visibility, receiveTodos } = this.props;
-    fetchTodos(visibility)
-      .then(todos =>
-        receiveTodos(todos)
-      );
+    const { visibility, fetchTodos } = this.props;
+    fetchTodos(visibility);
   }
 
   render() {
@@ -216,7 +212,7 @@ TodoListWithFilter = withRouter(connect(
     onTodoCheck: actions.checkTodo,
     onTodoDelete: actions.deleteTodo,
     onTodoEdit: actions.editTodo,
-    receiveTodos: actions.receiveTodos
+    fetchTodos: actions.fetchTodos
   }
 )(TodoListWithFilter));
 

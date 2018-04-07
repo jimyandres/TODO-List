@@ -1,4 +1,5 @@
 import { v4 } from 'uuid'; // generation of RFC4122 UUIDS. Version 4 (random)
+import * as api from '../api';
 
 // Return an object to dispatch the action type "RECEIVE_TODOS"
 const receiveTodos = (visibility, response) => ({
@@ -6,6 +7,11 @@ const receiveTodos = (visibility, response) => ({
   visibility,
   response
 });
+
+const fetchTodos = (visibility) =>
+  api.fetchTodos(visibility).then(response =>
+    receiveTodos(visibility, response)
+  );
 
 // Return an objet to dispatch the action type "ADD_TODO"
 const addTodo = (text) => ({
@@ -52,7 +58,7 @@ const clearTodos = (allIdsToDelete) => ({
 });
 
 export {
-  receiveTodos,
+  fetchTodos,
   addTodo,
   checkTodo,
   editTodo,
