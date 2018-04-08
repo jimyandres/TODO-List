@@ -40,10 +40,13 @@ const addTodo = (text) => (dispatch) =>
   });
 
 // return an object to dispatch the action type "CHECK_TODO"
-const checkTodo = (id) => ({
-  type: 'CHECK_TODO',
-  id: id
-});
+const checkTodo = (id) => (dispatch) =>
+  api.checkTodo(id).then(response => {
+    dispatch({
+      type: 'CHECK_TODO_SUCCESS',
+      response: normalize(response, schema.todo),
+    });
+  });
 
 // return an object to dispatch the action type "EDIT_TODO"
 const editTodo = (id, text) => ({
