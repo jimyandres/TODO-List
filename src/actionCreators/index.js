@@ -1,3 +1,5 @@
+import { normalize } from 'normalizr';
+import * as schema from './schema';
 import { getIsFetching } from '../redux';
 import * as api from '../api';
 
@@ -15,7 +17,7 @@ const fetchTodos = (visibility) => (dispatch, getState) => {
       dispatch({
         type: 'FETCH_TODOS_SUCCESS',
         visibility,
-        response
+        response: normalize(response, schema.arrayOfTodos)
       });
     },
     error => {
@@ -33,7 +35,7 @@ const addTodo = (text) => (dispatch) =>
   api.addTodo(text).then(response => {
     dispatch({
       type: 'ADD_TODO_SUCCESS',
-      response
+      response: normalize(response, schema.todo)
     });
   });
 
