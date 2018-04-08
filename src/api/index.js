@@ -3,6 +3,8 @@ import { v4 } from 'uuid'; // generation of RFC4122 UUIDS. Version 4 (random)
 // This is a fake in-memory implementation of something that would be implemented
 // by calling a REST server.
 
+const DELAY = 200;
+
 const fakeDatabase = {
   todos: [{
     id: v4(),
@@ -23,7 +25,7 @@ const delay = (ms) =>
   new Promise(resolve => setTimeout(resolve, ms));
 
 export const fetchTodos = (filter) =>
-  delay(500).then(() => {
+  delay(DELAY).then(() => {
     // if (Math.random() > 0.5) {
     //   throw new Error('Boom!');
     // }
@@ -41,7 +43,7 @@ export const fetchTodos = (filter) =>
   });
 
 export const addTodo = (text) =>
-  delay(500).then(() => {
+  delay(DELAY).then(() => {
     const todo = {
       id: v4(),
       text: text,
@@ -52,8 +54,15 @@ export const addTodo = (text) =>
   });
 
 export const checkTodo = (id) =>
-  delay(500).then(() => {
+  delay(DELAY).then(() => {
     const todo = fakeDatabase.todos.find(t => t.id === id);
     todo.completed = !todo.completed;
+    return todo;
+  });
+
+export const editTodo = (id, text) =>
+  delay(DELAY).then(() => {
+    const todo = fakeDatabase.todos.find(t => t.id === id);
+    todo.text = text;
     return todo;
   });

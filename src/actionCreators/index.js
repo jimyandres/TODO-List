@@ -49,11 +49,13 @@ const checkTodo = (id) => (dispatch) =>
   });
 
 // return an object to dispatch the action type "EDIT_TODO"
-const editTodo = (id, text) => ({
-  type: 'EDIT_TODO',
-  id: id,
-  text: text
-});
+const editTodo = (id, text) => (dispatch) =>
+  api.editTodo(id, text).then(response => {
+    dispatch({
+      type: 'EDIT_TODO_SUCCESS',
+      response: normalize(response, schema.todo),
+    });
+  });
 
 // return an object to dispatch the action type "DEL_TODO"
 const deleteTodo = (id) => ({

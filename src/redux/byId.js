@@ -11,19 +11,3 @@ const byId = (state = {}, action) => {
 export default byId;
 
 export const getTodo = (state, id) => state[id];
-
-
-// case 'ADD_TODO':
-// case 'CHECK_TODO':
-// case 'EDIT_TODO':
-// case 'CHECK_ALL':
-//   return {
-//     ...state,
-//     [action.id]: todo(state[action.id], action)
-//   };
-// case 'DEL_TODO':
-//   return omit(state,action.id);
-// case 'CLEAR_COMPLETED':
-//   return omit(state,action.Ids);
-// default:
-// return state;

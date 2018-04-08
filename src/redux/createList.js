@@ -1,19 +1,7 @@
 import { combineReducers } from 'redux';
+import * as handle from './handleTodos';
 
 const createList = (visibility) => {
-  const handleChecked = (state, action) => {
-    const { result: checkedId, entities } = action.response
-    const { completed } = entities.todos[checkedId];
-
-    const shouldRemove = (
-      (completed && visibility === 'pending') ||
-      (!completed && visibility !== 'completed')
-    );
-    return shouldRemove
-      ? state.filter(id => id !== checkedId)
-      : state;
-  };
-
   const ids = (state = [], action) => {
     switch (action.type) {
       case 'FETCH_TODOS_SUCCESS':
@@ -25,7 +13,7 @@ const createList = (visibility) => {
           ? [...state, action.response.result]
           : state;
       case 'CHECK_TODO_SUCCESS':
-        return handleChecked(state, action);
+        return handle.checked(state, action);
       default:
         return state;
     }

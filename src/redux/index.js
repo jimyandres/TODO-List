@@ -1,23 +1,8 @@
 import { combineReducers } from 'redux';
-import todo from './todo';
-import omit from 'lodash/omit';
 
 import byId, * as fromById from './byId';
 import createList, * as fromList from './createList';
 
-
-// const allIds = (state = [], action) => {
-//   switch (action.type) {
-//     // case 'ADD_TODO':
-//     //   return [...state, action.id];
-//     // case 'DEL_TODO':
-//     //   return state.filter(key => key !== action.id);
-//     // case 'CLEAR_COMPLETED':
-//     //   return state.filter(key => key !== action.Ids.filter(key2 => key2 === key)[0]);
-//     default:
-//       return state;
-//   }
-// };
 
 const listByVisibility = combineReducers({
   all: createList('all'),
