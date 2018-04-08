@@ -190,7 +190,7 @@ class TodoListWithFilter extends Component {
 
   fetchData() {
     const { visibility, fetchTodos } = this.props;
-    fetchTodos(visibility);
+    fetchTodos(visibility).then(() => console.log('done!'));
   }
 
   render() {

@@ -17,7 +17,7 @@ const requestTodos = (visibility) => ({
 
 const fetchTodos = (visibility) => (dispatch, getState) => {
   if (getIsFetching(getState(), visibility)) {
-    return;
+    return Promise.resolve();
   }
   dispatch(requestTodos(visibility));
 
