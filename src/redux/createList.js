@@ -2,12 +2,15 @@ import { combineReducers } from 'redux';
 
 const createList = (visibility) => {
   const ids = (state = [], action) => {
-    if (action.visibility !== visibility) {
-      return state;
-    }
     switch (action.type) {
       case 'FETCH_TODOS_SUCCESS':
-        return action.response.map(todo => todo.id);
+        return visibility === action.visibility
+          ? action.response.map(todo => todo.id)
+          : state;
+      case 'ADD_TODO_SUCCESS':
+        return visibility !== 'completed'
+          ? [...state, action.response.id]
+          : state;
       default:
         return state;
     }
