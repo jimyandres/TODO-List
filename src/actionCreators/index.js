@@ -2,28 +2,31 @@ import { v4 } from 'uuid'; // generation of RFC4122 UUIDS. Version 4 (random)
 import { getIsFetching } from '../redux';
 import * as api from '../api';
 
-// Return an object to dispatch the action type "RECEIVE_TODOS"
-const receiveTodos = (visibility, response) => ({
-  type: 'RECEIVE_TODOS',
-  visibility,
-  response
-});
-
-// Return an object to dispatch the action type "REQUEST_TODOS"
-const requestTodos = (visibility) => ({
-  type: 'REQUEST_TODOS',
-  visibility,
-});
-
 const fetchTodos = (visibility) => (dispatch, getState) => {
   if (getIsFetching(getState(), visibility)) {
     return Promise.resolve();
   }
-  dispatch(requestTodos(visibility));
-
-  return api.fetchTodos(visibility).then(response => {
-    dispatch(receiveTodos(visibility, response));
+  dispatch({
+    type: 'FETCH_TODOS_REQUEST',
+    visibility,
   });
+
+  return api.fetchTodos(visibility).then(
+    response => {
+      dispatch({
+        type: 'FETCH_TODOS_SUCCESS',
+        visibility,
+        response
+      });
+    },
+    error => {
+      dispatch({
+        type: 'FETCH_TODOS_FAILURE',
+        visibility,
+        message: error.message || 'something went wrong!'
+      });
+    }
+  );
 }
 
 // Return an objet to dispatch the action type "ADD_TODO"

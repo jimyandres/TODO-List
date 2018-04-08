@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { getVisibleTodos, getIsFetching } from '../../redux';
+import { getVisibleTodos, getErrorMessage, getIsFetching } from '../../redux';
 import * as actions from '../../actionCreators';
+import FetchError from '../FetchError';
 import './index.css';
 
 const TodoCheckbox = (props) => {
@@ -194,10 +195,19 @@ class TodoListWithFilter extends Component {
   }
 
   render() {
-    const {checkTodo, deleteTodo, editTodo, isFetching, todos} = this.props;
+    const {checkTodo, deleteTodo, editTodo, isFetching, errorMessage, todos} = this.props;
 
     if (isFetching && !todos.length) {
       return <Loading />;
+    }
+
+    if (errorMessage && !todos.length) {
+      return (
+        <FetchError
+          message={errorMessage}
+          onRetry={() => this.fetchData()}
+        />
+      );
     }
 
     return (
@@ -233,6 +243,7 @@ const mapStateToProps = (state, {match}) => {
   const visibility = match.params.visibility || 'all';
   return {
     todos: getVisibleTodos(state, visibility),
+    errorMessage: getErrorMessage(state, visibility),
     isFetching: getIsFetching(state, visibility),
     visibility,
   };
@@ -240,12 +251,6 @@ const mapStateToProps = (state, {match}) => {
 
 TodoListWithFilter = withRouter(connect(
   mapStateToProps,
-  // {
-  //   onTodoCheck: actions.checkTodo,
-  //   onTodoDelete: actions.deleteTodo,
-  //   onTodoEdit: actions.editTodo,
-  //   fetchTodos: actions.fetchTodos
-  // }
   actions
 )(TodoListWithFilter));
 
