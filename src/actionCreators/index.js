@@ -14,10 +14,13 @@ const requestTodos = (visibility) => ({
   visibility,
 });
 
-const fetchTodos = (visibility) =>
-  api.fetchTodos(visibility).then(response =>
-    receiveTodos(visibility, response)
-  );
+const fetchTodos = (visibility) => (dispatch) => {
+  dispatch(requestTodos(visibility));
+  
+  return api.fetchTodos(visibility).then(response => {
+    dispatch(receiveTodos(visibility, response));
+  });
+}
 
 // Return an objet to dispatch the action type "ADD_TODO"
 const addTodo = (text) => ({
@@ -65,7 +68,6 @@ const clearTodos = (allIdsToDelete) => ({
 
 export {
   fetchTodos,
-  requestTodos,
   addTodo,
   checkTodo,
   editTodo,

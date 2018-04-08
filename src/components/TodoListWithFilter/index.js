@@ -189,8 +189,7 @@ class TodoListWithFilter extends Component {
   }
 
   fetchData() {
-    const { visibility, fetchTodos, requestTodos } = this.props;
-    requestTodos(visibility);
+    const { visibility, fetchTodos } = this.props;
     fetchTodos(visibility);
   }
 
