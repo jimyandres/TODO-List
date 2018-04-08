@@ -11,6 +11,10 @@ const fakeDatabase = {
   },{
     id: v4(),
     text: 'ho',
+    completed: false,
+  },{
+    id: v4(),
+    text: 'ho',
     completed: true,
   }],
 };

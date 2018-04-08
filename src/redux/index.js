@@ -20,9 +20,9 @@ import createList, * as fromList from './createList';
 // };
 
 const listByVisibility = combineReducers({
-  all: createList(all),
-  pending: createList(pending),
-  completed: createList(completed),
+  all: createList('all'),
+  pending: createList('pending'),
+  completed: createList('completed'),
 });
 
 const todos = combineReducers({
@@ -36,3 +36,6 @@ export const getVisibleTodos = (state, visibility) => {
   const ids = fromList.getIds(state.listByVisibility[visibility]);
   return ids.map(id => fromById.getTodo(state.byId, id));
 };
+
+export const getIsFetching = (state, visibility) =>
+  fromList.getIsFetching(state.listByVisibility[visibility]);

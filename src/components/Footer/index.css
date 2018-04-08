@@ -1,7 +1,6 @@
 #Filters {
   display: flex;
   justify-content: center;
-  padding-top: 30px;
 }
 
 #CompletedTasks {
@@ -18,4 +17,8 @@
   font-family: inherit;
   color: #45767F;
   border: #45767F 1px solid;
+}
+
+.footer {
+    margin-top: auto;
 }

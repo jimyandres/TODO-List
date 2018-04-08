@@ -19,9 +19,9 @@ let ClearCompleted = ({todos, onClick}) => {
   return (
     <button
       className="btn clearTodos"
-      onClick={() => onClick(todos.allIds.filter(key => todos.byId[key].completed))}
+      onClick={/*() => onClick(todos.allIds.filter(key => todos.byId[key].completed))*/ ()=> console.log('Not implemented')}
     >
-      Clear Completed ({todos.idsByVisibility.completed.length})
+      Clear Completed ({/*todos.idsByVisibility.completed.length*/ '?'})
     </button>
   );
 };

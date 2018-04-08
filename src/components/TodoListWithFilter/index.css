@@ -4,15 +4,15 @@
 	/* margin:0 -3rem 4px; */
 	/* padding:1.1rem 3rem; */
 	justify-content:space-between;
-	align-items:center;
+	align-items: center;
   margin: 10px 0;
   border-radius: 2em;
 	background:rgba(0,107,227,0.03);
 }
 
 ul {
-	margin: 2rem 0 0 -2.5rem;
-  margin-bottom: 40px;
+	margin: 2rem 0 0 -2rem;
+  margin-bottom: 2rem;
 	list-style:none;
 }
 
@@ -129,4 +129,20 @@ ul {
 }
 .todoText.checked {
   text-decoration: line-through;
+}
+
+.loader{
+  height: 40px;
+  width: 20%;
+  /*text-align: center;*/
+  /*padding: auto;*/
+  margin: 2.5rem auto auto;
+}
+
+/*
+  Set the color of the loading icon
+*/
+svg path,
+svg rect{
+  fill: #006B7F;
 }

@@ -5,7 +5,7 @@ import ClearCompleted from '../ClearCompleted';
 import './index.css';
 
 const Footer = () =>
-  <div id="Footer">
+  <div id="Footer" className='footer'>
     <div id="Filters">
       <FilterTodos visibility='all' title='All' />
       <FilterTodos visibility='completed' title='Completed' />
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
 
 let CompletedTasks = ({todos}) =>
   <div id="CompletedTasks" className="left">
-    {todos.idsByVisibility.pending.length} Items Left
+    {/*todos.idsByVisibility.pending.length*/ '?'} Items Left
   </div>
 
 CompletedTasks = connect(mapStateToProps)(CompletedTasks);
