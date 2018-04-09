@@ -4,7 +4,7 @@ const checked = (state, action) => {
   const { visibility } = state;
 
   const shouldRemove = (
-    (completed && visibility === 'pending') ||
+    (completed && visibility !== 'pending') ||
     (!completed && visibility !== 'completed')
   );
   return shouldRemove
@@ -12,6 +12,12 @@ const checked = (state, action) => {
     : state;
 };
 
+const deleted = (state, action) => {
+  const { result: todos } = action.response;
+  return todos;
+};
+
 export {
   checked,
+  deleted,
 };

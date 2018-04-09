@@ -14,6 +14,10 @@ const createList = (visibility) => {
           : state;
       case 'CHECK_TODO_SUCCESS':
         return handle.checked(state, action);
+      case 'DEL_TODO_SUCCESS':
+        return visibility !== action.visibility
+          ? action.response.result
+          : state;
       default:
         return state;
     }
