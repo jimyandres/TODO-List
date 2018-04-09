@@ -27,3 +27,6 @@ export const getIsFetching = (state, visibility) =>
 
 export const getErrorMessage = (state, visibility) =>
   fromList.getErrorMessage(state.listByVisibility[visibility]);
+
+export const getTodosCount = (state) =>
+  fromList.getTodosCount(state);

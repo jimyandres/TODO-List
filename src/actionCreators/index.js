@@ -72,7 +72,7 @@ const checkAll = (completedAll) => ({
   completedAll: completedAll
 });
 
-// return an object to dispatch the action to set visibility
+// return an object to dispatch the action "SET_VISIBILITY_FILTER"
 const setVisibility = (filter) => ({
   type: 'SET_VISIBILITY_FILTER',
   filter: filter
@@ -84,6 +84,15 @@ const clearTodos = (allIdsToDelete) => ({
   Ids: allIdsToDelete
 });
 
+// return an object to dispatch the action type "GET_COUNT"
+const getCount = () => (dispatch) =>
+  api.getCount().then(response => {
+    dispatch({
+      type: 'GET_TODOS_COUNT_SUCCESS',
+      response
+    });
+  });
+
 export {
   fetchTodos,
   addTodo,
@@ -92,5 +101,6 @@ export {
   deleteTodo,
   checkAll,
   setVisibility,
-  clearTodos
+  clearTodos,
+  getCount
 };

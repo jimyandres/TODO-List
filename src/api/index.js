@@ -80,3 +80,10 @@ export const deleteTodo = (id, visibility) =>
     }
     return byVisibility(visibility);
   });
+
+export const getCount = () =>
+  delay(DELAY).then(() => {
+    const completed = fakeDatabase.todos.filter(t => t.completed).length;
+    const pending = fakeDatabase.todos.length - completed;
+    return {completed,pending};
+  });

@@ -246,7 +246,6 @@ const mapStateToProps = (state, {match}) => {
   return {
     todos: getVisibleTodos(state, visibility),
     errorMessage: getErrorMessage(state, visibility),
-    isFetching: getIsFetching(state, visibility),
     visibility,
   };
 };
