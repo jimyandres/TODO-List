@@ -88,8 +88,8 @@ const clearTodos = (allIdsToDelete) => ({
 const getCount = () => (dispatch) =>
   api.getCount().then(response => {
     dispatch({
-      type: 'GET_TODOS_COUNT_SUCCESS',
-      response
+      type: 'GET_TODOS_COUNT',
+      count: response
     });
   });
 

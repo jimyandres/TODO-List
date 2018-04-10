@@ -14,7 +14,6 @@ const Footer = () =>
       <FilterTodos visibility='pending' title='Pending' />
     </div>
     <GetCompletedTasks/>
-    {/* <CompletedTasks/> */}
     <ClearCompleted/>
   </div>
 
@@ -26,10 +25,10 @@ const mapStateToProps = (state) => {
 };
 
 class GetCompletedTasks extends Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
-      pendig: 0
+      pending: 0
     }
   }
 
@@ -37,26 +36,31 @@ class GetCompletedTasks extends Component {
     this.getCount();
   }
 
-  componentDidUpdate () {
+  shouldComponentUpdate (nextState) {
+    return !(nextState.pending === this.state.pending);
+  }
+
+  componentDidUpdate (prevState) {
     this.getCount();
   }
 
   getCount () {
     const { getCount } = this.props;
-    getCount().then((response) => console.log(response, 'done getCount'));
+    getCount();
   }
 
   render () {
-    const {pending} = this.state;
-    return <CompletedTasks count={pending} />;
+    const { todosCount = 0 } = this.props;
+    return <CompletedTasks count={todosCount.pending} />;
   }
 }
 
-const CompletedTasks = ({count}) =>
-<div id="CompletedTasks" className="left">
-  {count} Items Left
-</div>
-
 GetCompletedTasks = connect(mapStateToProps, actions)(GetCompletedTasks);
+
+
+const CompletedTasks = ({count = 0}) =>
+  <div id="CompletedTasks" className="left">
+    {count} Items Left
+  </div>
 
 export default Footer;

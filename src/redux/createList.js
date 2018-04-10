@@ -53,20 +53,10 @@ const createList = (visibility) => {
     }
   };
 
-  const todosCount = (state = null, action) => {
-    switch (action.type) {
-      case 'GET_TODOS_COUNT_SUCCESS':
-        return action.response;
-    default:
-      return state;
-    }
-  };
-
   return combineReducers({
     ids,
     isFetching,
     errorMessage,
-    todosCount,
   });
 };
 
@@ -75,4 +65,3 @@ export default createList;
 export const getIds = (state) => state.ids;
 export const getIsFetching = (state) => state.isFetching;
 export const getErrorMessage = (state) => state.errorMessage;
-export const getTodosCount = (state) => state.todosCount;

@@ -1,7 +1,4 @@
 const byId = (state = {}, action) => {
-  if (action.type === 'GET_TODOS_COUNT_SUCCESS') {
-    return state;
-  } else
   if (action.response) {
     return {
       ...state,

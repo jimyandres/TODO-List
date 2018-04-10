@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import byId, * as fromById from './byId';
 import createList, * as fromList from './createList';
-
+import appInfo, * as fromInfo from './appInfo';
 
 const listByVisibility = combineReducers({
   all: createList('all'),
@@ -12,7 +12,8 @@ const listByVisibility = combineReducers({
 
 const todos = combineReducers({
   byId,
-  listByVisibility
+  listByVisibility,
+  appInfo,
 });
 
 export default todos;
@@ -29,4 +30,4 @@ export const getErrorMessage = (state, visibility) =>
   fromList.getErrorMessage(state.listByVisibility[visibility]);
 
 export const getTodosCount = (state) =>
-  fromList.getTodosCount(state);
+  fromInfo.getTodosCount(state.appInfo);
