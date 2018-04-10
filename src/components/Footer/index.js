@@ -37,7 +37,7 @@ class GetCompletedTasks extends Component {
   }
 
   shouldComponentUpdate (nextState) {
-    return !(nextState.pending === this.state.pending);
+    return (nextState.todosCount.pending !== this.state.pending);
   }
 
   componentDidUpdate (prevState) {
@@ -45,13 +45,13 @@ class GetCompletedTasks extends Component {
   }
 
   getCount () {
-    const { getCount } = this.props;
-    getCount();
+    const { getCount,todosCount } = this.props;
+    getCount().then(() => this.setState({pending:todosCount.pending}));
   }
 
   render () {
-    const { todosCount = 0 } = this.props;
-    return <CompletedTasks count={todosCount.pending} />;
+    const { pending } = this.state;
+    return <CompletedTasks count={pending} />;
   }
 }
 
