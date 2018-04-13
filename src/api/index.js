@@ -1,5 +1,4 @@
 import { v4 } from 'uuid'; // generation of RFC4122 UUIDS. Version 4 (random)
-import { omit } from 'lodash/omit';
 
 // This is a fake in-memory implementation of something that would be implemented
 // by calling a REST server.
@@ -79,6 +78,12 @@ export const deleteTodo = (id, visibility) =>
     if (index > -1) {
       fakeDatabase.todos.splice(index, 1);
     }
-    console.log('fakeDatabase',fakeDatabase);
     return byVisibility(visibility);
+  });
+
+export const getCount = () =>
+  delay(DELAY).then(() => {
+    const completed = fakeDatabase.todos.filter(t => t.completed).length;
+    const pending = fakeDatabase.todos.length - completed;
+    return {completed,pending};
   });

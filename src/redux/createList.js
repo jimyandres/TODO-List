@@ -56,7 +56,7 @@ const createList = (visibility) => {
   return combineReducers({
     ids,
     isFetching,
-    errorMessage
+    errorMessage,
   });
 };
 

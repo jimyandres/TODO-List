@@ -6,7 +6,7 @@ const checked = (state, action, visibility) => {
     (completed && visibility === 'pending') ||
     (!completed && visibility === 'completed')
   );
-  console.log('shouldRemove',shouldRemove, action);
+  
   return shouldRemove
     ? state.filter(id => id !== checkedId)
     : state;
