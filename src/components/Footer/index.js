@@ -17,45 +17,47 @@ const Footer = () =>
     <ClearCompleted/>
   </div>
 
-const mapStateToProps = (state) => {
-  return {
-    todos: state.todos,
-    todosCount: getTodosCount(state),
-  }
-};
-
 class GetCompletedTasks extends Component {
   constructor (props) {
     super(props);
     this.state = {
       pending: 0
     }
+    this.getData = this.getData.bind(this);
   }
 
   componentDidMount () {
-    this.getCount();
+    this.getData();
   }
 
-  shouldComponentUpdate (nextState) {
-    return (nextState.todosCount.pending !== this.state.pending);
+  shouldComponentUpdate (nextProps) {
+    return (typeof (this.props.todosCount) !== 'undefined' && nextProps.todosCount.pending !== this.state.pending);
+  }
+  componentDidUpdate() {
+    const { todosCount } = this.props;
+    this.setState({pending: todosCount.pending})
   }
 
-  componentDidUpdate (prevState) {
-    this.getCount();
-  }
-
-  getCount () {
-    const { getCount,todosCount } = this.props;
-    getCount().then(() => this.setState({pending:todosCount.pending}));
+  getData () {
+    const { getCount } = this.props;
+    new Promise((resolve, reject) => {
+      resolve(getCount());
+    }).then(() => this.setState({pending: this.props.todosCount.pending}));
   }
 
   render () {
     const { pending } = this.state;
-    return <CompletedTasks count={pending} />;
+    return (<CompletedTasks count={pending} />);
   }
 }
 
-GetCompletedTasks = connect(mapStateToProps, actions)(GetCompletedTasks);
+const mapStateToProps = (state) => {
+  return {
+    todosCount: getTodosCount(state),
+  }
+};
+
+GetCompletedTasks = connect(mapStateToProps, actions, null, { pure: false })(GetCompletedTasks);
 
 
 const CompletedTasks = ({count = 0}) =>
