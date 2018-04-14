@@ -36,6 +36,7 @@ const appInfo = (state = {}, action) => {
     case 'CLEAR_COMPLETED_SUCCESS': {
       const todosCount = {
         completed: 0,
+        pending: state.todosCount.pending
       };
       return {
         ...state,

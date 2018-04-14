@@ -85,7 +85,6 @@ const setVisibility = (filter) => ({
 // return an object to dispatch the action type "CLEAR_COMPLETED"
 const clearTodos = (visibility) => (dispatch) =>
   api.clearTodos(visibility).then(response => {
-    console.log('visibility:',visibility);
     dispatch({
       type: 'CLEAR_COMPLETED_SUCCESS',
       response: normalize(response, schema.arrayOfTodos),

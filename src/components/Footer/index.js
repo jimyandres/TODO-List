@@ -32,7 +32,10 @@ class GetCompletedTasks extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return (typeof (this.props.todosCount) !== 'undefined' && nextProps.todosCount.pending !== this.state.pending && nextProps.todosCount.completed !== this.state.completed);
+    return (
+      typeof (this.props.todosCount) !== 'undefined' &&
+      (nextProps.todosCount.pending !== this.state.pending ||
+      nextProps.todosCount.completed !== this.state.completed));
   }
   componentDidUpdate() {
     const { todosCount } = this.props;
@@ -71,7 +74,7 @@ const mapStateToProps = (state, {match}) => {
   }
 };
 
-GetCompletedTasks = withRouter(connect(mapStateToProps, actions, null, {pure:true})(GetCompletedTasks));
+GetCompletedTasks = withRouter(connect(mapStateToProps, actions, null, {pure:false})(GetCompletedTasks));
 
 
 const CompletedTasks = ({count = 0}) =>

@@ -184,7 +184,6 @@ class TodoListWithFilter extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('from todolist', prevProps);
     if (this.props.visibility !== prevProps.visibility) {
       this.fetchData();
     }
@@ -192,7 +191,7 @@ class TodoListWithFilter extends Component {
 
   fetchData() {
     const { visibility, fetchTodos } = this.props;
-    fetchTodos(visibility).then(() => console.log('done!'));
+    fetchTodos(visibility);
   }
 
   render() {
