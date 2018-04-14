@@ -29,6 +29,7 @@ const appInfo = (state = {}, action) => {
         completed: completedAll ? pending + completed : 0,
         pending: !completedAll ? pending + completed : 0
       };
+      console.log(action);
       return {
         ...state,
         todosCount

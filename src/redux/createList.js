@@ -5,7 +5,6 @@ const createList = (visibility) => {
   const ids = (state = [], action) => {
     switch (action.type) {
       case 'FETCH_TODOS_SUCCESS':
-      case 'CHECK_ALL_SUCCESS':
         return visibility === action.visibility
           ? action.response.result
           : state;
@@ -16,6 +15,7 @@ const createList = (visibility) => {
       case 'CHECK_TODO_SUCCESS':
         return handle.checked(state, action, visibility);
       case 'DEL_TODO_SUCCESS':
+      case 'CHECK_ALL_SUCCESS':
         return visibility !== action.visibility
           ? action.response.result
           : state;
