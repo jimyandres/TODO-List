@@ -1,31 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { clearTodos } from '../../actionCreators';
+import { withRouter } from 'react-router';
+import * as actions from '../../actionCreators';
+import { getVisibleTodos } from '../../redux';
 import './index.css';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    todos: state.todos,
-    ...ownProps
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onClick: (todos) => dispatch(clearTodos(todos))
-  };
-};
-
-let ClearCompleted = ({todos, onClick, count}) => {
+const ClearCompleted = ({count, visibility, clearTodos}) => {
   return (
     <button
       className="btn clearTodos"
-      onClick={/*() => onClick(todos.allIds.filter(key => todos.byId[key].completed))*/ ()=> console.log('Not implemented')}
+      onClick={() => clearTodos(visibility)}
     >
       Clear Completed ({count})
     </button>
   );
 };
-ClearCompleted = connect(mapStateToProps, mapDispatchToProps)(ClearCompleted);
 
 export default ClearCompleted;

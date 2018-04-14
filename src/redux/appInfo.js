@@ -33,6 +33,15 @@ const appInfo = (state = {}, action) => {
         todosCount
       };
     }
+    case 'CLEAR_COMPLETED_SUCCESS': {
+      const todosCount = {
+        completed: 0,
+      };
+      return {
+        ...state,
+        todosCount
+      };
+    }
     default:
       return state;
   }

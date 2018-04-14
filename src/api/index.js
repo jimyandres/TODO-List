@@ -93,3 +93,12 @@ export const checkAll = (completedAll, visibility) =>
     fakeDatabase.todos.forEach((x) => x.completed = completedAll);
     return byVisibility(visibility);
   });
+
+export const clearTodos = (visibility) =>
+  delay(DELAY).then(() => {
+    const indices = fakeDatabase.todos.map((i,k) => i.completed === true ? k : -1 );
+    console.log(indices);
+    console.log(indices.reverse().map(i => i !== -1 ? fakeDatabase.todos.splice(i, 1) : null));
+    console.log(fakeDatabase);
+    return byVisibility(visibility);
+  });

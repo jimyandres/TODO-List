@@ -16,6 +16,7 @@ const createList = (visibility) => {
         return handle.checked(state, action, visibility);
       case 'DEL_TODO_SUCCESS':
       case 'CHECK_ALL_SUCCESS':
+      case 'CLEAR_COMPLETED_SUCCESS':
         return visibility !== action.visibility
           ? action.response.result
           : state;

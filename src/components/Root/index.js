@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 const Root = ({store}) =>
   <Provider store={store}>
     <BrowserRouter>
-      <Route path="/:visibility?" component={App} />
+      <Route path="/:visibility?" render={() => <App />} />
     </BrowserRouter>
   </Provider>
 

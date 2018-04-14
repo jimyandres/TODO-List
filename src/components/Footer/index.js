@@ -4,6 +4,7 @@ import FilterTodos from '../FilterTodos';
 import ClearCompleted from '../ClearCompleted';
 import { getTodosCount } from '../../redux';
 import * as actions from '../../actionCreators';
+import { withRouter } from 'react-router';
 import './index.css';
 
 const Footer = () =>
@@ -20,7 +21,8 @@ class GetCompletedTasks extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      pending: 0
+      pending: 0,
+      completed: 0
     }
     this.getData = this.getData.bind(this);
   }
@@ -30,7 +32,7 @@ class GetCompletedTasks extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return (typeof (this.props.todosCount) !== 'undefined' && nextProps.todosCount.pending !== this.state.pending);
+    return (typeof (this.props.todosCount) !== 'undefined' && nextProps.todosCount.pending !== this.state.pending && nextProps.todosCount.completed !== this.state.completed);
   }
   componentDidUpdate() {
     const { todosCount } = this.props;
@@ -52,21 +54,24 @@ class GetCompletedTasks extends Component {
 
   render () {
     const { pending, completed } = this.state;
+    const { clearTodos, visibility } = this.props;
     return (
       <div>
         <CompletedTasks count={pending} />
-        <ClearCompleted count={completed} />
+        <ClearCompleted count={completed} clearTodos={clearTodos} visibility={visibility} />
       </div>);
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, {match}) => {
+  const { visibility = 'all' } = match.params;
   return {
     todosCount: getTodosCount(state),
+    visibility
   }
 };
 
-GetCompletedTasks = connect(mapStateToProps, actions, null, { pure: false })(GetCompletedTasks);
+GetCompletedTasks = withRouter(connect(mapStateToProps, actions, null, {pure:true})(GetCompletedTasks));
 
 
 const CompletedTasks = ({count = 0}) =>

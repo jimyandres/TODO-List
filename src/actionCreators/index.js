@@ -83,10 +83,14 @@ const setVisibility = (filter) => ({
 });
 
 // return an object to dispatch the action type "CLEAR_COMPLETED"
-const clearTodos = (allIdsToDelete) => ({
-  type: 'CLEAR_COMPLETED',
-  Ids: allIdsToDelete
-});
+const clearTodos = (visibility) => (dispatch) =>
+  api.clearTodos(visibility).then(response => {
+    console.log('visibility:',visibility);
+    dispatch({
+      type: 'CLEAR_COMPLETED_SUCCESS',
+      response: normalize(response, schema.arrayOfTodos),
+    });
+  });
 
 // return an object to dispatch the action type "GET_COUNT"
 const getCount = () => (dispatch) =>
