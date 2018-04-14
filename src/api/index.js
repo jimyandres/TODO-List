@@ -37,17 +37,17 @@ const byVisibility = (visibility) => {
   }
 };
 
-export const fetchTodos = (visibility) =>
+const fetchTodos = (visibility) =>
   delay(DELAY).then(() => {
-    // if (Math.random() > 0.5) {
-    //   throw new Error('Boom!');
-    // }
+    if (Math.random() < 0.1) {
+      throw new Error('Boom!');
+    }
 
     return byVisibility(visibility);
 
   });
 
-export const addTodo = (text) =>
+const addTodo = (text) =>
   delay(DELAY).then(() => {
     const todo = {
       id: v4(),
@@ -58,21 +58,21 @@ export const addTodo = (text) =>
     return todo;
   });
 
-export const checkTodo = (id) =>
+const checkTodo = (id) =>
   delay(DELAY).then(() => {
     const todo = fakeDatabase.todos.find(t => t.id === id);
     todo.completed = !todo.completed;
     return todo;
   });
 
-export const editTodo = (id, text) =>
+const editTodo = (id, text) =>
   delay(DELAY).then(() => {
     const todo = fakeDatabase.todos.find(t => t.id === id);
     todo.text = text;
     return todo;
   });
 
-export const deleteTodo = (id, visibility) =>
+const deleteTodo = (id, visibility) =>
   delay(DELAY).then(() => {
     const index = fakeDatabase.todos.findIndex(t => t.id === id);
     if (index > -1) {
@@ -81,22 +81,33 @@ export const deleteTodo = (id, visibility) =>
     return byVisibility(visibility);
   });
 
-export const getCount = () =>
+const getCount = () =>
   delay(DELAY).then(() => {
     const completed = fakeDatabase.todos.filter(t => t.completed).length;
     const pending = fakeDatabase.todos.length - completed;
     return {completed,pending};
   });
 
-export const checkAll = (completedAll, visibility) =>
+const checkAll = (completedAll, visibility) =>
   delay(DELAY).then(() => {
     fakeDatabase.todos.forEach((x) => x.completed = completedAll);
     return byVisibility(visibility);
   });
 
-export const clearTodos = (visibility) =>
+const clearTodos = (visibility) =>
   delay(DELAY).then(() => {
     const indices = fakeDatabase.todos.map((i,k) => i.completed === true ? k : -1 );
     indices.reverse().map(i => i !== -1 ? fakeDatabase.todos.splice(i, 1) : null);
     return byVisibility(visibility);
   });
+
+export {
+  fetchTodos,
+  addTodo,
+  checkTodo,
+  editTodo,
+  deleteTodo,
+  getCount,
+  checkAll,
+  clearTodos,
+};
