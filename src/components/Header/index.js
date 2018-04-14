@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { checkAll } from '../../actionCreators';
+import { withRouter } from 'react-router'
 import './index.css';
 
 class Header extends Component {
@@ -15,9 +16,10 @@ class Header extends Component {
   }
 
   onClickCheckAll() {
-    const {dispatch} = this.props;
+    const {dispatch, match} = this.props;
+    const visibility = match.params.visibility ? match.params.visibility : 'all';
     this.setState((prevState) => {
-      dispatch(checkAll(!prevState.checkAll));
+      dispatch(checkAll(!prevState.checkAll,visibility));
       return {checkAll: !prevState.checkAll}
     });
   };
@@ -48,6 +50,6 @@ class Header extends Component {
     );
   };
 }
-Header = connect()(Header);
+Header = withRouter(connect()(Header));
 
 export default Header;

@@ -67,10 +67,14 @@ const deleteTodo = (id, visibility) => (dispatch) =>
   });
 
 // return an object to dispatch the action type "CHECK_ALL"
-const checkAll = (completedAll) => ({
-  type: 'CHECK_ALL',
-  completedAll: completedAll
-});
+const checkAll = (completedAll, visibility) => (dispatch) =>
+  api.checkAll(completedAll, visibility).then(response => {
+    dispatch({
+      type: 'CHECK_ALL_SUCCESS',
+      response: normalize(response, schema.arrayOfTodos),
+      completedAll
+    });
+  });
 
 // return an object to dispatch the action "SET_VISIBILITY_FILTER"
 const setVisibility = (filter) => ({

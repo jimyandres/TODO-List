@@ -14,7 +14,6 @@ const Footer = () =>
       <FilterTodos visibility='pending' title='Pending' />
     </div>
     <GetCompletedTasks/>
-    <ClearCompleted/>
   </div>
 
 class GetCompletedTasks extends Component {
@@ -35,19 +34,29 @@ class GetCompletedTasks extends Component {
   }
   componentDidUpdate() {
     const { todosCount } = this.props;
-    this.setState({pending: todosCount.pending})
+    this.setState({
+      pending: todosCount.pending,
+      completed: todosCount.completed
+    })
   }
 
   getData () {
     const { getCount } = this.props;
     new Promise((resolve, reject) => {
       resolve(getCount());
-    }).then(() => this.setState({pending: this.props.todosCount.pending}));
+    }).then(() => this.setState({
+      pending: this.props.todosCount.pending,
+      completed: this.props.todosCount.completed
+    }));
   }
 
   render () {
-    const { pending } = this.state;
-    return (<CompletedTasks count={pending} />);
+    const { pending, completed } = this.state;
+    return (
+      <div>
+        <CompletedTasks count={pending} />
+        <ClearCompleted count={completed} />
+      </div>);
   }
 }
 

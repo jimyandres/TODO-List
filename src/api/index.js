@@ -87,3 +87,9 @@ export const getCount = () =>
     const pending = fakeDatabase.todos.length - completed;
     return {completed,pending};
   });
+
+export const checkAll = (completedAll, visibility) =>
+  delay(DELAY).then(() => {
+    fakeDatabase.todos.forEach((x) => x.completed = completedAll);
+    return byVisibility(visibility);
+  });
