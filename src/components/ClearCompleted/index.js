@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { clearTodos } from '../../actionCreators';
 import './index.css';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    todos: state.todos
+    todos: state.todos,
+    ...ownProps
   };
 };
 
@@ -15,13 +16,13 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-let ClearCompleted = ({todos, onClick}) => {
+let ClearCompleted = ({todos, onClick, count}) => {
   return (
     <button
       className="btn clearTodos"
       onClick={/*() => onClick(todos.allIds.filter(key => todos.byId[key].completed))*/ ()=> console.log('Not implemented')}
     >
-      Clear Completed ({/*todos.idsByVisibility.completed.length*/ '?'})
+      Clear Completed ({count})
     </button>
   );
 };
