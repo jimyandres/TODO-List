@@ -9,31 +9,30 @@ const appInfo = (state = {}, action) => {
         ...state,
         ...state.todosCount.pending ++
       };
-    case 'CHECK_TODO_SUCCESS':
-      if (action.response.entities.todos[action.response.result].completed) {
-        return {
-          ...state,
-          ...state.todosCount.pending --,
-          ...state.todosCount.completed ++
-        };
-      }
-      return {
-        ...state,
-        ...state.todosCount.pending ++,
-        ...state.todosCount.completed --
-      };
-    case 'CHECK_ALL_SUCCESS':
-      const {completedAll} = action;
-      const {pending, completed} = state.todosCount;
+    case 'CHECK_TODO_SUCCESS': {
+      const isCompleted = action.response.entities.todos[action.response.result].completed;
+      const { pending, completed } = state.todosCount;
       const todosCount = {
-        completed: completedAll ? pending + completed : 0,
-        pending: !completedAll ? pending + completed : 0
+        completed: isCompleted ? completed + 1 : completed - 1,
+        pending: !isCompleted ? pending + 1 : pending - 1
       };
-      console.log(action);
       return {
         ...state,
         todosCount
       };
+    }
+    case 'CHECK_ALL_SUCCESS': {
+      const {completedAll} = action;
+      const {completed, pending} = state.todosCount;
+      const todosCount = {
+        completed: completedAll ? pending + completed : 0,
+        pending: !completedAll ? pending + completed : 0
+      };
+      return {
+        ...state,
+        todosCount
+      };
+    }
     default:
       return state;
   }
