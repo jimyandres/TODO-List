@@ -22,6 +22,9 @@ const appInfo = (state = {}, action) => {
         ...state.todosCount.pending ++,
         ...state.todosCount.completed --
       };
+    case 'DEL_TODO_SUCCESS':
+      console.log('del todo: ', action);
+      return state;
     default:
       return state;
   }

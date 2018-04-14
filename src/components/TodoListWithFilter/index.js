@@ -74,7 +74,7 @@ class Todo extends Component {
   }
 
   render () {
-    const {onTodoDelete, id, visibility, ...rest} = this.props;
+    const {onTodoDelete, getCount, id, visibility, ...rest} = this.props;
     const {hoverDelete, editing, newText} = this.state;
     return (
 
@@ -90,7 +90,7 @@ class Todo extends Component {
         onMouseOver={() => this.onMouseOver()}
         onMouseOut={() => this.onMouseOut()}
         onDoubleClick={() => this.onDoubleClick()}
-        onTodoDelete={() => onTodoDelete(id, visibility)}
+        onTodoDelete={() => {onTodoDelete(id, visibility); getCount();}}
         {...rest}
       />
     );
@@ -196,7 +196,7 @@ class TodoListWithFilter extends Component {
   }
 
   render() {
-    const {checkTodo, deleteTodo, editTodo, isFetching, errorMessage, todos, visibility} = this.props;
+    const {checkTodo, deleteTodo, getCount, editTodo, isFetching, errorMessage, todos, visibility} = this.props;
 
     if (isFetching && !todos.length) {
       return <Loading />;
@@ -216,6 +216,7 @@ class TodoListWithFilter extends Component {
         onTodoCheck={checkTodo}
         onTodoDelete={deleteTodo}
         onTodoEdit={editTodo}
+        getCount={getCount}
         todos={todos}
         visibility={visibility}
       />
