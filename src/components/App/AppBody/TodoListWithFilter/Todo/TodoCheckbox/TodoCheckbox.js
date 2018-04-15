@@ -1,12 +1,12 @@
 import React from  'react';
 
 const TodoCheckbox = (props) => {
-  const { onMouseOver, onMouseOut, onClick, checked, id, children} = props;
+  const { onMouseEnter, onMouseLeave, onClick, checked, id, children} = props;
   return (
     <div
       className="divTodo"
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       >
       <div className="checkbox">
         <input

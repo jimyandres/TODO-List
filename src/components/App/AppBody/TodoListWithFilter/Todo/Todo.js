@@ -14,8 +14,8 @@ class Todo extends Component {
       newText: ''
     };
 
-    this.onMouseOver = this.onMouseOver.bind(this);
-    this.onMouseOut = this.onMouseOut.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onDoubleClick = this.onDoubleClick.bind(this);
     this.handleInput = this.handleInput.bind(this);
   }
@@ -28,11 +28,11 @@ class Todo extends Component {
     this.setState({newText: newText});
   }
 
-  onMouseOver() {
+  onMouseEnter() {
     this.setState({hoverDelete: true});
   }
 
-  onMouseOut() {
+  onMouseLeave() {
     this.setState({hoverDelete: false});
   }
 
@@ -61,9 +61,9 @@ class Todo extends Component {
         onKeyPress={(e) => this.handleKeyPress(e.key)}
 
         hoverDelete={hoverDelete}
-        onMouseOver={() => this.onMouseOver()}
-        onMouseOut={() => this.onMouseOut()}
-        onDoubleClick={() => this.onDoubleClick()}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        onDoubleClick={this.onDoubleClick}
         onTodoDelete={() => {onTodoDelete(id, visibility); getCount();}}
         {...rest}
       />
