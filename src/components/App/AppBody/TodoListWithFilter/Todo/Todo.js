@@ -52,7 +52,6 @@ class Todo extends Component {
     const {onTodoDelete, getCount, id, visibility, ...rest} = this.props;
     const {hoverDelete, editing, newText} = this.state;
     return (
-
       <TodoWithInput
         isEditing={editing}
         id={id}

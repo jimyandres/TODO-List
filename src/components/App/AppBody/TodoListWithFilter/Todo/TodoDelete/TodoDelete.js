@@ -1,6 +1,6 @@
 import React from 'react';
 import TodoCheckbox from '../TodoCheckbox';
-import TodoPlain from '../TodoEdit';
+import TodoPlain from '../TodoPlain';
 
 const TodoDelete = (props) => {
   const { onTodoDelete, ...rest } = props;
