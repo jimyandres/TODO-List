@@ -2,7 +2,7 @@ import React from 'react';
 import TodoCheckbox from '../TodoCheckbox';
 
 const TodoEdit = (props) => {
-  const { onChange, onKeyPress, value,...rest } = props;
+  const { onChange, onKeyPress, value, handleClickOutside, ...rest } = props;
   return (
     <TodoCheckbox {...rest} >
       <input
@@ -10,7 +10,9 @@ const TodoEdit = (props) => {
         type="text"
         value={value}
         onChange={onChange}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyPress}
+        onBlur={handleClickOutside}
+        autoFocus
       />
     </TodoCheckbox>
   );

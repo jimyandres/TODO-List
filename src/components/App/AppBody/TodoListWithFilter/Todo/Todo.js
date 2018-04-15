@@ -18,6 +18,7 @@ class Todo extends Component {
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onDoubleClick = this.onDoubleClick.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   componentDidMount() {
@@ -40,11 +41,17 @@ class Todo extends Component {
     this.setState({editing: true})
   }
 
+  handleClickOutside() {
+    this.setState({editing: false, newText: this.props.text})
+  }
+
   handleKeyPress(key) {
     const text = this.state.newText.trim();
     if (key === 'Enter' && text !== '') {
       this.props.onTodoEdit(this.props.id, text);
-      this.setState({editing: false, newText:text});
+      this.setState({editing: false, newText: text});
+    } else if (key === 'Escape') {
+      this.setState({editing: false, newText: this.props.text});
     }
   }
 
@@ -65,6 +72,7 @@ class Todo extends Component {
         onMouseLeave={this.onMouseLeave}
         onDoubleClick={this.onDoubleClick}
         onTodoDelete={() => {onTodoDelete(id, visibility); getCount();}}
+        handleClickOutside={this.handleClickOutside}
         {...rest}
       />
     );
