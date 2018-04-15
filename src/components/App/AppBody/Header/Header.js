@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { checkAll } from '../../../../actionCreators/index.js';
 import { withRouter } from 'react-router'
-import './index.css';
+import './Header.css';
 
 class Header extends Component {
   constructor (props) {
