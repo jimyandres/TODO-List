@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+import './ClearCompleted.css';
 
 const ClearCompleted = ({count, visibility, clearTodos}) => {
   return (
