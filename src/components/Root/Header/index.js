@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { checkAll } from '../../actionCreators';
+import { checkAll } from '../../../actionCreators';
 import { withRouter } from 'react-router'
 import './index.css';
 

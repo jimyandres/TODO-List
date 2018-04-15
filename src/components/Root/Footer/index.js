@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FilterTodos from '../FilterTodos';
 import ClearCompleted from '../ClearCompleted';
-import { getTodosCount } from '../../redux';
-import * as actions from '../../actionCreators';
+import { getTodosCount } from '../../../redux';
+import * as actions from '../../../actionCreators';
 import { withRouter } from 'react-router';
 import './index.css';
 
