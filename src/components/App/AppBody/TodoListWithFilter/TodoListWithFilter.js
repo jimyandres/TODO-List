@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { getVisibleTodos, getErrorMessage, getIsFetching } from ' ../../../../redux';
+import { getVisibleTodos, getErrorMessage, getIsFetching } from '../../../../redux';
 import * as actions from '../../../../actionCreators';
 import FetchError from './FetchError';
 import './index.css';

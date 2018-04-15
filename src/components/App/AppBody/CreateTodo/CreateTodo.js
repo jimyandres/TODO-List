@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import { connect } from 'react-redux';
-import { addTodo } from '../../../../../actionCreators';
+import { addTodo } from '../../../../actionCreators';
 
 let CreateTodo = ({dispatch}) => {
   let todoText;
