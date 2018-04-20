@@ -1,0 +1,19 @@
+.btn.FetchError {
+  font-size: 14px;
+  padding: 0.4em 1em;
+  letter-spacing: 0;
+  width: 8em;
+  color: #4C4508;
+  border: #4C4508 1px solid;
+}
+
+div.FetchError {
+  margin: 2em 0;
+}
+
+.btn.FetchError:hover,
+.btn.FetchError.active {
+  cursor: pointer;
+  color: #4C4508;
+  background: #CBA400;
+}
