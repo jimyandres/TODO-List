@@ -3,10 +3,10 @@ import Header from './Header';
 import CreateTodo from './CreateTodo';
 import TodoListWithFilter from './TodoListWithFilter';
 
-const AppBody = () =>
+const AppBody = (props) =>
   <div>
     <Header>
-      <CreateTodo />
+      <CreateTodo {...props} />
     </Header>
     <TodoListWithFilter />
   </div>

@@ -3,8 +3,9 @@ import './index.css';
 import { connect } from 'react-redux';
 import { addTodo } from '../../../../actionCreators';
 
-let CreateTodo = ({dispatch}) => {
+let CreateTodo = ({dispatch, ...rest}) => {
   let todoText;
+  console.log(rest);
 
   return (
     <div className="divInput">
