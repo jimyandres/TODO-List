@@ -31,8 +31,8 @@ const fetchTodos = (visibility) => (dispatch, getState) => {
 }
 
 // Return an objet to dispatch the action type "ADD_TODO"
-const addTodo = (text) => (dispatch) =>
-  api.addTodo(text).then(response => {
+const addTodo = (text, ownerId, tasks) => (dispatch) =>
+  api.addTodo(text, ownerId, tasks).then(response => {
     dispatch({
       type: 'ADD_TODO_SUCCESS',
       response: normalize(response, schema.todo)

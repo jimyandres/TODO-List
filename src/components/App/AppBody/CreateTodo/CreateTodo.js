@@ -3,10 +3,9 @@ import './index.css';
 import { connect } from 'react-redux';
 import { addTodo } from '../../../../actionCreators';
 
-let CreateTodo = ({dispatch, ...rest}) => {
+let CreateTodo = ({dispatch, stitchClient, tasks}) => {
   let todoText;
-  console.log(rest);
-
+  console.log(tasks, stitchClient);
   return (
     <div className="divInput">
       <input
@@ -15,7 +14,7 @@ let CreateTodo = ({dispatch, ...rest}) => {
         ref={node => todoText = node} onKeyPress= {(e) => {
           const text = todoText.value.trim();
           if (e.key === "Enter" && text !== '') {
-            dispatch(addTodo(text));
+            dispatch(addTodo(text, stitchClient.authedId(), tasks));
             todoText.value = '';
           }
       }}/>

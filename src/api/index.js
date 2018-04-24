@@ -27,6 +27,9 @@ const delay = (ms) =>
 const byVisibility = (visibility) => {
   switch (visibility) {
     case 'all':
+      // tasks.find(null, null).execute().then(function(data) {
+      //   console.log(data)
+      // });
       return fakeDatabase.todos;
     case 'pending':
       return fakeDatabase.todos.filter(t => !t.completed);
@@ -39,21 +42,17 @@ const byVisibility = (visibility) => {
 
 const fetchTodos = (visibility) =>
   delay(DELAY).then(() => {
-    if (Math.random() < 0.1) {
-      throw new Error('Boom!');
-    }
-
     return byVisibility(visibility);
-
   });
 
-const addTodo = (text) =>
+const addTodo = (text, ownerId, tasks) =>
   delay(DELAY).then(() => {
     const todo = {
       id: v4(),
       text: text,
       completed: false,
     };
+    tasks.insertOne({ text: text, completed: false, owner_id: ownerId });
     fakeDatabase.todos.push(todo);
     return todo;
   });
