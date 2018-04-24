@@ -44,7 +44,6 @@ class AuthControls extends Component {
           : null}
         {!authed
           ? <div className="login-links-panel">
-              <h2>TODO</h2>
               <div
                 onClick={() => this.stitchClient.authenticate("google")}
                 className="signin-button"

@@ -8,15 +8,18 @@ import Footer from './Footer';
 
 const App = (props) =>
   <div className="App">
-    <AuthControls {...props}/>
     {
       props.stitchClient.isAuthenticated() ?
       <div>
+        <AuthControls {...props}/>
         <AppTitle />
         <AppBody {...props} />
         <Footer />
       </div>
-      : null
+      : <div>
+        <AppTitle />
+        <AuthControls {...props}/>
+      </div>
     }
   </div>
 

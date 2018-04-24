@@ -1,6 +1,5 @@
-body {
-  font-family:"Roboto", serif;
-  margin:0px;
+svg path .googleLogo {
+  fill: !important none;
 }
 
 .settings-link {
@@ -18,7 +17,7 @@ body {
 }
 
 .login-links-panel{
-  margin:40px;
+  margin:50px;
 }
 
 .new-item-input {
@@ -122,10 +121,10 @@ body {
   cursor:pointer;
 	display: inline-flex;
 	align-items:center;
-	&-text{
+	/*&-text{
 		padding-left:10px;
-	}
-  margin-right:20px;
+	}*/
+  /*margin-right:20px;*/
 	padding:10px;
 	border: 1px solid #ccc;
 	border-radius:5px;
