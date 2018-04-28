@@ -57,7 +57,7 @@ class Todo extends Component {
   }
 
   render () {
-    const {onTodoDelete, getCount, _id, visibility, ...rest} = this.props;
+    const {onTodoDelete, getCount, _id, visibility, tasks, ...rest} = this.props;
     const {hoverDelete, editing, newText} = this.state;
     return (
       <TodoWithInput
@@ -72,7 +72,7 @@ class Todo extends Component {
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onDoubleClick={this.onDoubleClick}
-        onTodoDelete={() => {onTodoDelete(_id, visibility); getCount();}}
+        onTodoDelete={() => {onTodoDelete(tasks, _id, visibility); getCount();}}
         handleClickOutside={this.handleClickOutside}
         {...rest}
       />

@@ -55,14 +55,9 @@ const editTodo = (tasks, id, text) =>
     .then(res => tasks.findOne({_id:id}))
     .catch(e => console.error("Error Editing the ToDo:",e.message));
 
-const deleteTodo = (id, visibility) =>
-  delay(DELAY).then(() => {
-    const index = fakeDatabase.todos.findIndex(t => t.id === id);
-    if (index > -1) {
-      fakeDatabase.todos.splice(index, 1);
-    }
-    return byVisibility(visibility);
-  });
+const deleteTodo = (tasks, id, visibility) =>
+  tasks.deleteOne({ _id: id }).then(() => byVisibility(visibility, tasks))
+    .catch(e => console.error("Error Editing the ToDo:",e.message));
 
 const getCount = () =>
   delay(DELAY).then(() => {

@@ -58,8 +58,8 @@ const editTodo = (tasks, id, text) => (dispatch) =>
   });
 
 // return an object to dispatch the action type "DEL_TODO"
-const deleteTodo = (id, visibility) => (dispatch) =>
-  api.deleteTodo(id, visibility).then(response => {
+const deleteTodo = (tasks, id, visibility) => (dispatch) =>
+  api.deleteTodo(tasks, id, visibility).then(response => {
     dispatch({
       type: 'DEL_TODO_SUCCESS',
       response: normalize(response, schema.arrayOfTodos),
