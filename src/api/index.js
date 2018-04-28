@@ -50,12 +50,10 @@ const checkTodo = (tasks, id, prevStatus) =>
     .then(() => tasks.findOne({_id:id}))
     .catch(e => console.error("Error Checking the ToDo:",e.message));
 
-const editTodo = (id, text) =>
-  delay(DELAY).then(() => {
-    const todo = fakeDatabase.todos.find(t => t.id === id);
-    todo.text = text;
-    return todo;
-  });
+const editTodo = (tasks, id, text) =>
+  tasks.updateOne({ _id: id }, { $set: { text: text } })
+    .then(res => tasks.findOne({_id:id}))
+    .catch(e => console.error("Error Editing the ToDo:",e.message));
 
 const deleteTodo = (id, visibility) =>
   delay(DELAY).then(() => {

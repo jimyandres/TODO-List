@@ -9,13 +9,13 @@ import Loading from './Loading';
 import './TodoListWithFilter.css';
 
 const TodoList = (props) => {
-  const { todos, onTodoCheck, tasks, ...rest } = props;
+  const { todos, onTodoCheck, ...rest } = props;
   return (
     <ul>
       {todos.map(todo =>
         <Todo
           key={todo._id}
-          onClick={() => onTodoCheck(tasks, todo._id, todo.completed)}
+          onClick={() => onTodoCheck(props.tasks, todo._id, todo.completed)}
           checked={todo.completed}
           {...todo}
           {...rest}

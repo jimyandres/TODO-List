@@ -49,8 +49,8 @@ const checkTodo = (tasks, id, prevStatus) => (dispatch) =>
   });
 
 // return an object to dispatch the action type "EDIT_TODO"
-const editTodo = (id, text) => (dispatch) =>
-  api.editTodo(id, text).then(response => {
+const editTodo = (tasks, id, text) => (dispatch) =>
+  api.editTodo(tasks, id, text).then(response => {
     dispatch({
       type: 'EDIT_TODO_SUCCESS',
       response: normalize(response, schema.todo),
