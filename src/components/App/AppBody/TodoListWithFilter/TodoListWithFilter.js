@@ -9,14 +9,13 @@ import Loading from './Loading';
 import './TodoListWithFilter.css';
 
 const TodoList = (props) => {
-  const { todos, onTodoCheck, ...rest } = props;
-
+  const { todos, onTodoCheck, tasks, ...rest } = props;
   return (
     <ul>
       {todos.map(todo =>
         <Todo
           key={todo._id}
-          onClick={() => onTodoCheck(todo.id)}
+          onClick={() => onTodoCheck(tasks, todo._id, todo.completed)}
           checked={todo.completed}
           {...todo}
           {...rest}
@@ -43,7 +42,7 @@ class TodoListWithFilter extends Component {
   }
 
   render() {
-    const {checkTodo, deleteTodo, getCount, editTodo, isFetching, errorMessage, todos, visibility} = this.props;
+    const {checkTodo, deleteTodo, getCount, editTodo, isFetching, errorMessage, todos, visibility, tasks} = this.props;
 
     if (isFetching && !todos.length) {
       return <Loading />;
@@ -66,6 +65,7 @@ class TodoListWithFilter extends Component {
         getCount={getCount}
         todos={todos}
         visibility={visibility}
+        tasks={tasks}
       />
     );
   }

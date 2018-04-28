@@ -13,7 +13,7 @@ let CreateTodo = ({dispatch, stitchClient, tasks}) => {
         ref={node => todoText = node} onKeyPress= {(e) => {
           const text = todoText.value.trim();
           if (e.key === "Enter" && text !== '') {
-            dispatch(addTodo(text, stitchClient.authedId(), tasks));
+            dispatch(addTodo(tasks, text, stitchClient.authedId()));
             todoText.value = '';
           }
       }}/>

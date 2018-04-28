@@ -40,17 +40,15 @@ const byVisibility = (visibility, tasks) => {
 const fetchTodos = (visibility, tasks) =>
   byVisibility(visibility, tasks);
 
-const addTodo = (text, ownerId, tasks) =>
+const addTodo = (tasks, text, ownerId) =>
   tasks.insertOne({ text: text, completed: false, owner_id: ownerId })
     .then(res => tasks.findOne({_id:res.insertedId}))
-    .catch(e => console.error("Error Inserting:",e.message));
+    .catch(e => console.error("Error Inserting the ToDo:",e.message));
 
-const checkTodo = (id) =>
-  delay(DELAY).then(() => {
-    const todo = fakeDatabase.todos.find(t => t.id === id);
-    todo.completed = !todo.completed;
-    return todo;
-  });
+const checkTodo = (tasks, id, prevStatus) =>
+  tasks.updateOne({ _id: id }, { $set: { completed: !prevStatus } })
+    .then(() => tasks.findOne({_id:id}))
+    .catch(e => console.error("Error Checking the ToDo:",e.message));
 
 const editTodo = (id, text) =>
   delay(DELAY).then(() => {

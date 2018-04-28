@@ -48,7 +48,7 @@ class Todo extends Component {
   handleKeyPress(key) {
     const text = this.state.newText.trim();
     if (key === 'Enter' && text !== '') {
-      this.props.onTodoEdit(this.props.id, text);
+      this.props.onTodoEdit(this.props._id, text);
       this.setState({editing: false, newText: text});
     } else if (key === 'Escape') {
       this.setState({editing: false, newText: this.props.text});
@@ -56,12 +56,12 @@ class Todo extends Component {
   }
 
   render () {
-    const {onTodoDelete, getCount, id, visibility, ...rest} = this.props;
+    const {onTodoDelete, getCount, _id, visibility, ...rest} = this.props;
     const {hoverDelete, editing, newText} = this.state;
     return (
       <TodoWithInput
         isEditing={editing}
-        id={id}
+        id={_id}
         value={newText}
         text={newText}
         onChange={(e) => this.handleInput(e.target.value)}
@@ -71,7 +71,7 @@ class Todo extends Component {
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onDoubleClick={this.onDoubleClick}
-        onTodoDelete={() => {onTodoDelete(id, visibility); getCount();}}
+        onTodoDelete={() => {onTodoDelete(_id, visibility); getCount();}}
         handleClickOutside={this.handleClickOutside}
         {...rest}
       />
