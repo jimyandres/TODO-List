@@ -1,4 +1,4 @@
 import { schema } from 'normalizr';
 
-export const todo = new schema.Entity('todos', undefined, { idAttribute: item => item._id.toString() });
+export const todo = new schema.Entity('todos', undefined, { idAttribute: '_id' });
 export const arrayOfTodos = [todo];
