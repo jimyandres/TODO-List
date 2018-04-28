@@ -15,7 +15,7 @@ const TodoList = (props) => {
     <ul>
       {todos.map(todo =>
         <Todo
-          key={todo.id}
+          key={todo._id}
           onClick={() => onTodoCheck(todo.id)}
           checked={todo.completed}
           {...todo}
@@ -38,8 +38,8 @@ class TodoListWithFilter extends Component {
   }
 
   fetchData() {
-    const { visibility, fetchTodos } = this.props;
-    fetchTodos(visibility);
+    const { visibility, fetchTodos, tasks } = this.props;
+    fetchTodos(visibility, tasks);
   }
 
   render() {
@@ -71,8 +71,9 @@ class TodoListWithFilter extends Component {
   }
 }
 
-const mapStateToProps = (state, {match}) => {
-  const visibility = match.params.visibility || 'all';
+const mapStateToProps = (state, ownProps) => {
+  const visibility = ownProps.match.params.visibility || 'all';
+  const { tasks } = ownProps;
   return {
     todos: getVisibleTodos(state, visibility),
     errorMessage: getErrorMessage(state, visibility),

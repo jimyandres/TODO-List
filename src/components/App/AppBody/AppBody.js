@@ -8,7 +8,7 @@ const AppBody = (props) =>
     <Header>
       <CreateTodo {...props} />
     </Header>
-    <TodoListWithFilter />
+    <TodoListWithFilter {...props} />
   </div>
 
 export default AppBody;

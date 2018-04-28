@@ -5,7 +5,6 @@ import { addTodo } from '../../../../actionCreators';
 
 let CreateTodo = ({dispatch, stitchClient, tasks}) => {
   let todoText;
-  console.log(tasks, stitchClient);
   return (
     <div className="divInput">
       <input

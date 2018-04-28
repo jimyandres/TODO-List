@@ -24,38 +24,26 @@ let fakeDatabase = {
 const delay = (ms) =>
   new Promise(resolve => setTimeout(resolve, ms));
 
-const byVisibility = (visibility) => {
+const byVisibility = (visibility, tasks) => {
   switch (visibility) {
     case 'all':
-      // tasks.find(null, null).execute().then(function(data) {
-      //   console.log(data)
-      // });
-      return fakeDatabase.todos;
+      return tasks.find().execute();
     case 'pending':
-      return fakeDatabase.todos.filter(t => !t.completed);
+      return tasks.find({ completed: { $eq: false }}).execute();
     case 'completed':
-      return fakeDatabase.todos.filter(t => t.completed);
+      return tasks.find({ completed: { $eq: true }}).execute();
     default:
       throw new Error(`unknown filter: ${visibility}`);
   }
 };
 
-const fetchTodos = (visibility) =>
-  delay(DELAY).then(() => {
-    return byVisibility(visibility);
-  });
+const fetchTodos = (visibility, tasks) =>
+  byVisibility(visibility, tasks);
 
 const addTodo = (text, ownerId, tasks) =>
-  delay(DELAY).then(() => {
-    const todo = {
-      id: v4(),
-      text: text,
-      completed: false,
-    };
-    tasks.insertOne({ text: text, completed: false, owner_id: ownerId });
-    fakeDatabase.todos.push(todo);
-    return todo;
-  });
+  tasks.insertOne({ text: text, completed: false, owner_id: ownerId })
+    .then(res => tasks.findOne({_id:res.insertedId}))
+    .catch(e => console.error("Error Inserting:",e.message));
 
 const checkTodo = (id) =>
   delay(DELAY).then(() => {

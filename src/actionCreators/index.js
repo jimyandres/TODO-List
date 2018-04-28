@@ -3,7 +3,7 @@ import * as schema from './schema';
 import { getIsFetching } from '../redux';
 import * as api from '../api';
 
-const fetchTodos = (visibility) => (dispatch, getState) => {
+const fetchTodos = (visibility, tasks) => (dispatch, getState) => {
   if (getIsFetching(getState(), visibility)) {
     return Promise.resolve();
   }
@@ -12,7 +12,7 @@ const fetchTodos = (visibility) => (dispatch, getState) => {
     visibility,
   });
 
-  return api.fetchTodos(visibility).then(
+  return api.fetchTodos(visibility, tasks).then(
     response => {
       dispatch({
         type: 'FETCH_TODOS_SUCCESS',
