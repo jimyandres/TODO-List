@@ -86,8 +86,8 @@ const clearTodos = (visibility) => (dispatch) =>
   });
 
 // return an object to dispatch the action type "GET_COUNT"
-const getCount = () => (dispatch) =>
-  api.getCount().then(response => {
+const getCount = (tasks) => (dispatch) =>
+  api.getCount(tasks).then(response => {
     dispatch({
       type: 'GET_TODOS_COUNT',
       count: response

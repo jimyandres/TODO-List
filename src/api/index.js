@@ -29,9 +29,9 @@ const byVisibility = (visibility, tasks) => {
     case 'all':
       return tasks.find().execute();
     case 'pending':
-      return tasks.find({ completed: { $eq: false }}).execute();
+      return tasks.find({ completed: false }).execute();
     case 'completed':
-      return tasks.find({ completed: { $eq: true }}).execute();
+      return tasks.find({ completed: true }).execute();
     default:
       throw new Error(`unknown filter: ${visibility}`);
   }
@@ -59,12 +59,12 @@ const deleteTodo = (tasks, id, visibility) =>
   tasks.deleteOne({ _id: id }).then(() => byVisibility(visibility, tasks))
     .catch(e => console.error("Error Editing the ToDo:",e.message));
 
-const getCount = () =>
-  delay(DELAY).then(() => {
-    const completed = fakeDatabase.todos.filter(t => t.completed).length;
-    const pending = fakeDatabase.todos.length - completed;
-    return {completed,pending};
-  });
+const getCount = (tasks) =>
+  tasks.count({ completed: false })
+    .then((pending) =>
+      tasks.count({ completed: true })
+        .then((completed) => ({completed,pending}))
+    );
 
 const checkAll = (completedAll, visibility) =>
   delay(DELAY).then(() => {

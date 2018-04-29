@@ -35,9 +35,9 @@ class StateCount extends Component {
   }
 
   getData () {
-    const { getCount } = this.props;
+    const { getCount, tasks } = this.props;
     new Promise((resolve, reject) => {
-      resolve(getCount());
+      resolve(getCount(tasks));
     }).then(() => this.setState({
       pending: this.props.todosCount.pending,
       completed: this.props.todosCount.completed
@@ -55,11 +55,13 @@ class StateCount extends Component {
   }
 }
 
-const mapStateToProps = (state, {match}) => {
-  const { visibility = 'all' } = match.params;
+const mapStateToProps = (state, ownProps) => {
+  const { visibility = 'all' } = ownProps.match.params;
+  const { tasks } = ownProps;
   return {
     todosCount: getTodosCount(state),
-    visibility
+    visibility,
+    tasks
   }
 };
 

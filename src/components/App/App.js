@@ -14,7 +14,7 @@ const App = (props) =>
         <AuthControls {...props}/>
         <AppTitle />
         <AppBody {...props} />
-        <Footer />
+        <Footer {...props} />
       </div>
       : <div>
         <AppTitle />

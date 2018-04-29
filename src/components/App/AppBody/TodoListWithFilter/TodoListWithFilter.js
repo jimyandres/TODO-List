@@ -73,7 +73,6 @@ class TodoListWithFilter extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const visibility = ownProps.match.params.visibility || 'all';
-  const { tasks } = ownProps;
   return {
     todos: getVisibleTodos(state, visibility),
     errorMessage: getErrorMessage(state, visibility),
