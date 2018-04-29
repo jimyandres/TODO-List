@@ -46,22 +46,20 @@ class StateCount extends Component {
 
   render () {
     const { pending, completed } = this.state;
-    const { clearTodos, visibility } = this.props;
+    const { clearTodos, visibility, tasks } = this.props;
     return (
       <div>
         <CompletedTasks count={pending} />
-        <ClearCompleted count={completed} clearTodos={clearTodos} visibility={visibility} />
+        <ClearCompleted count={completed} clearTodos={clearTodos} visibility={visibility} tasks={tasks} />
       </div>);
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { visibility = 'all' } = ownProps.match.params;
-  const { tasks } = ownProps;
+const mapStateToProps = (state, {match}) => {
+  const { visibility = 'all' } = match.params;
   return {
     todosCount: getTodosCount(state),
     visibility,
-    tasks
   }
 };
 

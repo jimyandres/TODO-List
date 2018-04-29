@@ -72,12 +72,10 @@ const checkAll = (completedAll, visibility, tasks) =>
     .then(() => byVisibility(visibility, tasks))
     .catch(e => console.error("Error Completing all the ToDos:",e.message));
 
-const clearTodos = (visibility) =>
-  delay(DELAY).then(() => {
-    const indices = fakeDatabase.todos.map((i,k) => i.completed === true ? k : -1 );
-    indices.reverse().map(i => i !== -1 ? fakeDatabase.todos.splice(i, 1) : null);
-    return byVisibility(visibility);
-  });
+const clearTodos = (visibility, tasks) =>
+  tasks.deleteMany({ 'completed' : true})
+    .then(() => byVisibility(visibility, tasks))
+    .catch(e => console.error("Error Completing all the ToDos:",e.message));
 
 export {
   fetchTodos,
