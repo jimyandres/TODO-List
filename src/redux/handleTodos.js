@@ -8,7 +8,7 @@ const checked = (state, action, visibility) => {
   );
   
   return shouldRemove
-    ? state.filter(id => id !== checkedId)
+    ? state.filter(id => id.toString() !== checkedId.toString())
     : state;
 };
 
