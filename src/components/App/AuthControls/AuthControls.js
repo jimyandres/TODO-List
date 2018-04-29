@@ -25,7 +25,7 @@ class AuthControls extends Component {
         {authed
           ? <div className="login-header">
               {this.state.userData && this.state.userData.picture
-                ? <img src={this.state.userData.picture} className="profile-pic" />
+                ? <img src={this.state.userData.picture} className="profile-pic" alt="profile-pic"/>
                 : null}
               <span className="login-text">
                 <span className="username">
@@ -33,12 +33,9 @@ class AuthControls extends Component {
                 </span>
               </span>
               <div>
-                <a className="logout" href="#" onClick={() => logout()}>
+                <button className="logout" onClick={() => logout()}>
                   sign out
-                </a>
-              </div>
-              <div>
-                <a className="settings" href="/settings">settings</a>
+                </button>
               </div>
             </div>
           : null}

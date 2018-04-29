@@ -10,11 +10,13 @@ const App = (props) =>
   <div className="App">
     {
       props.stitchClient.isAuthenticated() ?
-      <div>
+      <div >
         <AuthControls {...props}/>
-        <AppTitle />
-        <AppBody {...props} />
-        <Footer {...props} />
+        <div className="TodoApp">
+          <AppTitle />
+          <AppBody {...props} />
+          <Footer {...props} />
+        </div>
       </div>
       : <div>
         <AppTitle />

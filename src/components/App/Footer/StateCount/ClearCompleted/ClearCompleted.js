@@ -7,7 +7,7 @@ const ClearCompleted = ({count, visibility, clearTodos, tasks}) => {
       className="btn clearTodos"
       onClick={() => clearTodos(visibility,tasks)}
     >
-      Clear Completed ({count})
+      Clean Up ({count})
     </button>
   );
 };
