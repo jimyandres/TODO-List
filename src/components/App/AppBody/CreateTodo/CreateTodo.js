@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+import './CreateTodo.css';
 import { connect } from 'react-redux';
 import { addTodo } from '../../../../actionCreators';
 
