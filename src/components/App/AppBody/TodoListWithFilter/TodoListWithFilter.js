@@ -10,17 +10,21 @@ import './TodoListWithFilter.css';
 
 const TodoList = (props) => {
   const { todos, onTodoCheck, ...rest } = props;
+  const noTodos = !(todos.length > 0);
   return (
     <ul>
-      {todos.map(todo =>
-        <Todo
-          key={todo._id}
-          onClick={() => onTodoCheck(props.tasks, todo._id, todo.completed)}
-          checked={todo.completed}
-          {...todo}
-          {...rest}
-        />
-      )}
+      {noTodos
+        ? <span>No tasks to show!</span>
+        : todos.map(todo =>
+          <Todo
+            key={todo._id}
+            onClick={() => onTodoCheck(props.tasks, todo._id, todo.completed)}
+            checked={todo.completed}
+            {...todo}
+            {...rest}
+          />
+        )
+      }
     </ul>
   );
 };
