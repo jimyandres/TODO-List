@@ -1,29 +1,3 @@
-import { v4 } from 'uuid'; // generation of RFC4122 UUIDS. Version 4 (random)
-
-// This is a fake in-memory implementation of something that would be implemented
-// by calling a REST server.
-
-const DELAY = 200;
-
-let fakeDatabase = {
-  todos: [{
-    id: v4(),
-    text: 'hey',
-    completed: false,
-  },{
-    id: v4(),
-    text: 'ho',
-    completed: false,
-  },{
-    id: v4(),
-    text: 'ho',
-    completed: true,
-  }],
-};
-
-const delay = (ms) =>
-  new Promise(resolve => setTimeout(resolve, ms));
-
 const byVisibility = (visibility, tasks) => {
   switch (visibility) {
     case 'all':
