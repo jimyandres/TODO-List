@@ -32,8 +32,8 @@ class AuthControls extends Component {
                   {this.state.userData && this.state.userData.name ? this.state.userData.name : "?"}
                 </span>
               </span>
-              <div>
-                <button className="logout" onClick={() => logout()}>
+              <div className="logout" >
+                <button className="btn logout" onClick={() => logout()}>
                   sign out
                 </button>
               </div>
