@@ -19,7 +19,7 @@ class AuthControls extends Component {
 
   render() {
     let authed = this.stitchClient.isAuthenticated();
-    let logout = () => this.stitchClient.logout().then(() => window.location.reload());
+    let logout = () => this.stitchClient.logout().then(() => window.location.href="/");
     return (
       <div>
         {authed
