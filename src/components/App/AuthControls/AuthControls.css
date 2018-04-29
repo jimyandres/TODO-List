@@ -14,10 +14,6 @@
   width: 6em;
 }
 
-.login-links-panel{
-  margin:50px;
-}
-
 .new-item-input {
   font-size: 2em;
 }
@@ -56,23 +52,35 @@
   font-weight:bold;
 }
 
-.controls{
-  margin-left:80px;
-	display:flex;
-	align-items:center;
+.login-links-panel{
+  color:#888;
+  margin: 25px 0 0 0;
+  padding: 25px 0 50px 0;
+  background-color: #dddddd4d;
+  border-radius: 10px;
 }
 
-.signin-button {
+.buttons{
+  width: inherit;
+  display: flex;
+  justify-content: center;
+}
+
+button svg path, svg rect {
+
+}
+
+.signin-button.btn {
   cursor:pointer;
-	display: inline-flex;
+  display: flex;
 	align-items:center;
-	/*&-text{
-		padding-left:10px;
-	}*/
-  /*margin-right:20px;*/
+  margin: 0.7em;
 	padding:10px;
-	border: 1px solid #ccc;
-	border-radius:5px;
+  font-size: 15px;
+  padding: 0.7em;
+  letter-spacing: 0;
+  width: 10em;
+  background-color: white;
 }
 
 .facebook-signin-logo{

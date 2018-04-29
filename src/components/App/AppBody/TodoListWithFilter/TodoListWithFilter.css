@@ -142,7 +142,7 @@ ul {
 /*
   Set the color of the loading icon
 */
-svg path,
+#loader-1 path,
 svg rect{
   fill: #006B7F;
 }
