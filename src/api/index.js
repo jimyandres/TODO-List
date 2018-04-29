@@ -56,7 +56,8 @@ const editTodo = (tasks, id, text) =>
     .catch(e => console.error("Error Editing the ToDo:",e.message));
 
 const deleteTodo = (tasks, id, visibility) =>
-  tasks.deleteOne({ _id: id }).then(() => byVisibility(visibility, tasks))
+  tasks.deleteOne({ _id: id })
+    .then(() => byVisibility(visibility, tasks))
     .catch(e => console.error("Error Editing the ToDo:",e.message));
 
 const getCount = (tasks) =>
@@ -64,13 +65,12 @@ const getCount = (tasks) =>
     .then((pending) =>
       tasks.count({ completed: true })
         .then((completed) => ({completed,pending}))
-    );
+    ).catch(e => console.error("Error Getting the Count of ToDos:",e.message));;
 
-const checkAll = (completedAll, visibility) =>
-  delay(DELAY).then(() => {
-    fakeDatabase.todos.forEach((x) => x.completed = completedAll);
-    return byVisibility(visibility);
-  });
+const checkAll = (completedAll, visibility, tasks) =>
+  tasks.updateMany(null, { $set: { 'completed' : completedAll}})
+    .then(() => byVisibility(visibility, tasks))
+    .catch(e => console.error("Error Completing all the ToDos:",e.message));
 
 const clearTodos = (visibility) =>
   delay(DELAY).then(() => {

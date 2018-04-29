@@ -16,10 +16,10 @@ class Header extends Component {
   }
 
   onClickCheckAll() {
-    const {dispatch, match} = this.props;
+    const {dispatch, match, tasks} = this.props;
     const visibility = match.params.visibility ? match.params.visibility : 'all';
     this.setState((prevState) => {
-      dispatch(checkAll(!prevState.checkAll,visibility));
+      dispatch(checkAll(!prevState.checkAll,visibility,tasks));
       return {checkAll: !prevState.checkAll}
     });
   };

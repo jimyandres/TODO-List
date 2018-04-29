@@ -5,7 +5,7 @@ import TodoListWithFilter from './TodoListWithFilter';
 
 const AppBody = (props) =>
   <div>
-    <Header>
+    <Header {...props} >
       <CreateTodo {...props} />
     </Header>
     <TodoListWithFilter {...props} />

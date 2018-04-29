@@ -72,7 +72,7 @@ class Todo extends Component {
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onDoubleClick={this.onDoubleClick}
-        onTodoDelete={() => {onTodoDelete(tasks, _id, visibility); getCount();}}
+        onTodoDelete={() => {onTodoDelete(tasks, _id, visibility); getCount(tasks);}}
         handleClickOutside={this.handleClickOutside}
         {...rest}
       />
