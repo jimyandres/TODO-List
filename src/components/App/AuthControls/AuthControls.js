@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginHeader from './LoginHeader';
 import LoginLinksPanel from './LoginLinksPanel';
+import { Route, Switch, Redirect } from 'react-router'
 import './AuthControls.css';
 
 class AuthControls extends Component {
@@ -42,7 +43,10 @@ const withLoginHeader = (Component) =>
   ({isAuthed, ...rest}) =>
     isAuthed
     ? <LoginHeader {...rest} />
-    : <Component {...rest} />
+    : <Switch>
+      <Route exact path='/'render={() => <Component {...rest} />} />
+      <Redirect from='/:visibility?' to='/' />
+    </Switch>
 
 const AuthControlsWithLoginHeader = withLoginHeader(LoginLinksPanel);
 
